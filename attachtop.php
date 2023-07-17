@@ -22,8 +22,6 @@ $_SESSION['firstname'] = $firstname;
 $conn->close();
 ?>
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 

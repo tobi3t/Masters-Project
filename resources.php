@@ -3,7 +3,7 @@ include("attachtop.php");
 ?>
 
 <div class="card-header">
-  <h4 class="card-title">Dashboard</h4>
+  <h4 class="card-title">Resources</h4>
 </div>
 <div class="card-body">
   <div class="row">
