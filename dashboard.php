@@ -69,6 +69,12 @@ include("attachtop.php");
         $userId = $_SESSION['user_id'];
         $currentStreak = getCurrentStreak($conn, $userId);
 
+
+
+        if ($currentStreak < 7) {
+          echo '<i class="bi bi-exclamation-triangle-fill" style="color: red;"></i>';
+        }
+
         if ($currentStreak >= 30) {
           echo '<i class="bi bi-award-fill" style="color: gold;"></i>';
         }
@@ -80,6 +86,11 @@ include("attachtop.php");
         if ($currentStreak >= 90) {
           echo '<i class="bi bi-award-fill" style="color: gold;"></i>';
         }
+
+        if ($currentStreak > 6 && $currentStreak < 30) {
+          echo '<i class="bi bi-award-fill" style="color: silver;"></i>';
+        }
+
         ?>
       </p>
     </div>
@@ -101,7 +112,7 @@ include("attachtop.php");
             if ($result->num_rows > 0) {
                 $row = $result->fetch_assoc();
                 $targetStreak = $row['target_streak'];
-                echo "<p class='display-4 font-weight-bold'>$targetStreak days</p>";
+                echo "<p class='display-4 font-weight-bold text-success'>$targetStreak days</p>";
             } else {
                 echo "<p class='display-4 font-weight-bold'>0 day</p>";
             }
