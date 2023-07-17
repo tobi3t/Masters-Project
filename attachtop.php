@@ -1,3 +1,29 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['email'])) {
+  header("Location: signin.html");
+  exit();
+}
+
+include("connection.php");
+
+$email = $_SESSION['email'];
+
+$stmt = $conn->prepare("SELECT first_name FROM users WHERE email = ?");
+$stmt->bind_param("s", $email);
+$stmt->execute();
+$stmt->bind_result($firstname);
+$stmt->fetch();
+$stmt->close();
+
+$_SESSION['firstname'] = $firstname;
+
+$conn->close();
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,7 +63,7 @@
       <div class="row">
         <div class="col-lg-4">
           <div class="card mb-4">
-            <div class="card-header">Navigator</div>
+            <div class="card-header">Welcome, <?php echo $firstname; ?></div>
             <div class="card-body">
               <ul class="list-group">
                 <li class="list-group-item"><a href="dashboard.php">Dashboard</a></li>
