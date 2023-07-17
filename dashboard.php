@@ -6,7 +6,16 @@ include("attachtop.php");
   <h4 class="card-title">Dashboard</h4>
 </div>
 <div class="card-body">
-  <div class="row">
+<div class="row justify-content-center">
+    <div class="col-md-4">
+      <div class="mb-4 text-center">
+        <h5 class="card-title">Points Earned</h5>
+        <p class="display-1 font-weight-bold">1000</p>
+
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-center">
     <?php
 
   
@@ -34,24 +43,78 @@ include("attachtop.php");
    }
    ?>
    <div class="col-md-6">
-      <div class="mb-4">
-        <h5 class="card-title">Streak</h5>
-        <p class="card-text">
-          Current streak:
-        <h1><span id="currentStreak">
-            <?php echo getCurrentStreak($conn, $_SESSION['user_id']); ?>
-          </span> days
-        </h1>
-        </p>
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#streakModal">Set Streak</button>
-        <form action="resetstreak.php" method="POST" class="d-inline">
-          <button type="submit" class="btn btn-danger">Reset Streak</button>
-        </form>
+  <div class="mb-4 text-center">
+    <h5 class="card-title">Streak</h5>
+    <p class="card-text">
+      Current streak:
+    </p>
+    <h1>
+      <span id="currentStreak">
+        <?php echo getCurrentStreak($conn, $_SESSION['user_id']); ?>
+      </span> days
+    </h1>
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#streakModal">Set Streak</button>
+    <form action="resetstreak.php" method="POST" class="d-inline">
+      <button type="submit" class="btn btn-danger">Reset Streak</button>
+    </form>
+  </div>
+</div>
+  </div>
+  <div class="row justify-content-center">
+  <div class="col-md-4">
+    <div class="mb-4 text-center">
+      <h5 class="card-title">Badges</h5>
+      <p class="display-4 font-weight-bold">
+        <?php
+        $userId = $_SESSION['user_id'];
+        $currentStreak = getCurrentStreak($conn, $userId);
+
+        if ($currentStreak >= 30) {
+          echo '<i class="bi bi-award-fill" style="color: gold;"></i>';
+        }
+  
+        if ($currentStreak >= 60) {
+          echo '<i class="bi bi-award-fill" style="color: gold;"></i>';
+        }
+  
+        if ($currentStreak >= 90) {
+          echo '<i class="bi bi-award-fill" style="color: gold;"></i>';
+        }
+        ?>
+      </p>
+    </div>
+  </div>
+</div>
+  <div class="row justify-content-center">
+    <div class="col-md-4">
+      <div class="mb-4 text-center">
+        <h5 class="card-title">Streak Goal</h5>
+        <?php
+            $userId = $_SESSION['user_id'];
+
+            $query = "SELECT target_streak FROM target_streaks WHERE user_id = ?";
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param('i', $userId);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                $targetStreak = $row['target_streak'];
+                echo "<p class='display-4 font-weight-bold'>$targetStreak days</p>";
+            } else {
+                echo "<p class='display-4 font-weight-bold'>0 day</p>";
+            }
+            ?>
       </div>
     </div>
+  </div>
+
+  <div class="row justify-content-center">
+
     <div class="col-md-6">
-      <div class="mb-4">
-        <h5 class="card-title">Progress to Set Goal</h5>
+      <div class="mb-4 text-center">
+        <h5 class="card-title">Progress to Streak Goal</h5>
         <?php
 
        
@@ -98,99 +161,11 @@ include("attachtop.php");
     </div>
 
   </div>
-  <div class="row justify-content-center">
-    <div class="col-md-4">
-      <div class="mb-4 text-center">
-        <h5 class="card-title">Points Earned</h5>
-        <p class="display-1 font-weight-bold">1000</p>
-
-      </div>
-    </div>
-  </div>
-  <div class="row justify-content-center">
-    <div class="col-md-4">
-        <div class="mb-4 text-center">
-            <h5 class="card-title">Badges</h5>
-            <p class="display-4 font-weight-bold">
-                <?php
-                
-                $userId = $_SESSION['user_id'];
-
-                $query = "SELECT streak_start_date FROM streaks WHERE user_id = ? ORDER BY streak_start_date DESC LIMIT 1";
-                $stmt = $conn->prepare($query);
-                $stmt->bind_param('i', $userId);
-                $stmt->execute();
-                $result = $stmt->get_result();
-
-                if ($result->num_rows > 0) {
-                    $row = $result->fetch_assoc();
-                    $streakStartDate = new DateTime($row['streak_start_date']);
-                    $presentDate = new DateTime();
-                    $actualStreak = $presentDate->diff($streakStartDate)->days;
-
-                    $query = "SELECT target_streak FROM target_streaks WHERE user_id = ?";
-                    $stmt = $conn->prepare($query);
-                    $stmt->bind_param('i', $userId);
-                    $stmt->execute();
-                    $result = $stmt->get_result();
-
-                    if ($result->num_rows > 0) {
-                        $row = $result->fetch_assoc();
-                        $targetStreak = (int)$row['target_streak'];
-                        echo $actualStreak;
-
-                        if ($actualStreak >= 7) {
-                            echo '<i class="bi bi-award-fill" style="color: gold;"></i>';
-                        }
-
-                        if ($actualStreak >= 30) {
-                            echo '<i class="bi bi-award-fill" style="color: gold;"></i>';
-                        }
-
-                        if ($actualStreak >= 90) {
-                            echo '<i class="bi bi-award-fill" style="color: gold;"></i>';
-                        }
-                    } else {
-                        echo "No target streak set";
-                    }
-                } else {
-                    echo "No streak recorded";
-                }
-                ?>
-            </p>
-        </div>
-    </div>
-</div>
-
-  <div class="row justify-content-center">
-    <div class="col-md-4">
-      <div class="mb-4 text-center">
-        <h5 class="card-title">Streak Goal</h5>
-        <?php
-            $userId = $_SESSION['user_id'];
-
-            $query = "SELECT target_streak FROM target_streaks WHERE user_id = ?";
-            $stmt = $conn->prepare($query);
-            $stmt->bind_param('i', $userId);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            
-            if ($result->num_rows > 0) {
-                $row = $result->fetch_assoc();
-                $targetStreak = $row['target_streak'];
-                echo "<p class='display-4 font-weight-bold'>$targetStreak days</p>";
-            } else {
-                echo "<p class='display-4 font-weight-bold'>0 day</p>";
-            }
-            ?>
-      </div>
-    </div>
-  </div>
 
   <div class="row">
     <div class="col-md-12">
       <div>
-        <h5 class="card-title">Personal Goals</h5>
+        <h3 class="card-title">Other Goals</h3>
         <ul class="list-group">
           <?php
           include ("connection.php");
@@ -244,3 +219,8 @@ include("attachbottom.php");
     </div>
   </div>
 </div>
+
+
+
+
+
