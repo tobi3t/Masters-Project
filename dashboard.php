@@ -7,14 +7,43 @@ include("attachtop.php");
 </div>
 <div class="card-body">
   <div class="row">
-    <div class="col-md-6">
-      <div class="mb-4">
-        <h5 class="card-title">Streak</h5>
-        <p class="card-text">Current streak: <span id="currentStreak">7</span> days</p>
-        <button class="btn btn-primary">Set Streak</button>
-        <button class="btn btn-danger">Reset Streak</button>
-      </div>
-    </div>
+  <?php
+  
+  include("connection.php");
+
+  function getCurrentStreak($conn, $userId) {
+  $query = "SELECT streak_start_date FROM streaks WHERE user_id = ? ORDER BY streak_start_date DESC LIMIT 1";
+  $stmt = $conn->prepare($query);
+  $stmt->bind_param('i', $userId);
+  $stmt->execute();
+  $result = $stmt->get_result();
+
+  if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $streakStartDate = $row['streak_start_date'];
+
+    $presentDate = date("Y-m-d");
+    $dateDiff = abs(strtotime($presentDate) - strtotime($streakStartDate));
+    $currentStreak = floor($dateDiff / (60 * 60 * 24)); // Convert seconds to days
+
+    return $currentStreak;
+  }
+
+  return 0;
+}
+?>
+  <div class="col-md-6">
+  <div class="mb-4">
+    <h5 class="card-title">Streak</h5>
+    <p class="card-text">
+      Current streak: <h1><span id="currentStreak"><?php echo getCurrentStreak($conn, $_SESSION['user_id']); ?></span> days
+      </h1></p>
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#streakModal">Set Streak</button>
+    <form action="resetstreak.php" method="POST" class="d-inline">
+      <button type="submit" class="btn btn-danger">Reset Streak</button>
+    </form>
+  </div>
+</div>
     <div class="col-md-6">
       <div class="mb-4">
         <h5 class="card-title">Progress</h5>
@@ -80,7 +109,6 @@ include("attachtop.php");
           <?php
             }
           } else {
-            // No goals found for the user
             echo '<li class="list-group-item">No goals found.</li>';
           }
           ?>
@@ -93,3 +121,24 @@ include("attachtop.php");
 <?php
 include("attachbottom.php");
 ?>
+
+
+<div class="modal fade" id="streakModal" tabindex="-1" aria-labelledby="streakModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="streakModalLabel">Set Streak Start Date</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="setstreak.php" method="POST">
+          <div class="mb-3">
+            <label for="startDateInput" class="form-label">Start Date</label>
+            <input type="date" class="form-control" id="startDateInput" name="startDate" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
