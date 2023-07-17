@@ -65,7 +65,7 @@ $conn->close();
             <div class="card-body">
               <ul class="list-group">
                 <li class="list-group-item"><a href="dashboard.php">Dashboard</a></li>
-                <li class="list-group-item"><a href="goals.php">Manage Goals</a></li>
+                <li class="list-group-item"><a href="goals.php">Goal Setting</a></li>
                 <li class="list-group-item"><a href="forum.php">Forum</a></li>
                 <li class="list-group-item"><a href="quiz.php">Quiz</a></li>
                 <li class="list-group-item"><a href="resources.php">Resources</a></li>
