@@ -55,12 +55,35 @@ include("attachtop.php");
   </div>
   <div class="row">
     <div class="col-md-12">
-      <div>
+    <div>
         <h5 class="card-title">Goals</h5>
         <ul class="list-group">
-          <li class="list-group-item">Goal 1</li>
-          <li class="list-group-item">Goal 2</li>
-          <li class="list-group-item">Goal 3</li>
+          <?php
+          include ("connection.php");
+
+          $userId = $_SESSION['user_id'];
+          $query = "SELECT * FROM goals WHERE user_id = $userId";
+          $result = mysqli_query($conn, $query);
+
+          if (mysqli_num_rows($result) > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+              $goalId = $row['id'];
+              $title = $row['title'];
+          ?>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <?php echo $title; ?>
+                <form action="deletegoal.php" method="POST" class="d-inline">
+                  <input type="hidden" name="goal_id" value="<?php echo $goalId; ?>">
+                  <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+              </li>
+          <?php
+            }
+          } else {
+            // No goals found for the user
+            echo '<li class="list-group-item">No goals found.</li>';
+          }
+          ?>
         </ul>
       </div>
     </div>
