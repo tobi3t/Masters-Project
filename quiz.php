@@ -54,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     if ($conn->query($sql) === TRUE) {
         
-        header("Location: dashboard.php");
+        header("Location: result.php");
         exit();
     } else {
         echo "Error updating user points: " . $conn->error;
