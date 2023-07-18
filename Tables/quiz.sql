@@ -5,7 +5,7 @@ CREATE TABLE quiz (
   option2 VARCHAR(255),
   option3 VARCHAR(255),
   option4 VARCHAR(255),
-  correct_option INT,
+  correct_option VARCHAR(255),
   admin_id INT,
   FOREIGN KEY (admin_id) REFERENCES users(id)
 );

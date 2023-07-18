@@ -8,7 +8,6 @@ include("attachtop.php");
 <div class="card-body">
     <div class="row">
 
-
         <?php
 include("connection.php");
 
@@ -43,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
-       
+    
         $row = $result->fetch_assoc();
         $points = $row['points'] + $score;
         $sql = "UPDATE user_points SET points = '$points', score = '$score' WHERE user_id = '$user_id'";
@@ -51,9 +50,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         $sql = "INSERT INTO user_points (user_id, points, score) VALUES ('$user_id', '$score', '$score')";
     }
-    
+
     if ($conn->query($sql) === TRUE) {
-        
         header("Location: dashboard.php");
         exit();
     } else {
@@ -64,14 +62,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $conn->close();
 ?>
 
+
         <div class="container">
             <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                <?php $questionNumber = 1; ?>
                 <?php foreach ($questions as $question) : ?>
                 <div class="card mb-4">
                     <div class="card-body">
                         <h5 class="card-title">Question
-                            <?php echo $questionNumber++; ?>
+                            <?php echo $question['question_id']; ?>
                         </h5>
                         <p class="card-text">
                             <?php echo $question['question_text']; ?>
@@ -79,9 +77,8 @@ $conn->close();
 
                         <?php
                     $options = array($question['option1'], $question['option2'], $question['option3'], $question['option4']);
-                    
+                
                     shuffle($options);
-
                     foreach ($options as $option) {
                         echo '<div class="form-check">';
                         echo '<input class="form-check-input" type="radio" name="question' . $question['question_id'] . '" id="q' . $question['question_id'] . '-option' . $option . '" value="' . $option . '">';
@@ -97,6 +94,7 @@ $conn->close();
         </div>
     </div>
 </div>
+
 <?php
 include("attachbottom.php");
 ?>
