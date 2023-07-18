@@ -73,7 +73,7 @@ $result = mysqli_query($conn, $query);
     <div class="col-md-3">
       <div class="card mt-4">
         <div class="card-header">
-          <h4 class="card-title">Streak Goal Setter</h4>
+          <h4 class="card-title">Target Streak Setter</h4>
         </div>
         <div class="card-body">
           <form action="targetstreak.php" method="POST">

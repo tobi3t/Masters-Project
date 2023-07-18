@@ -43,23 +43,22 @@ include("attachtop.php");
    }
    ?>
    <div class="col-md-6">
-  <div class="mb-4 text-center">
-    <h5 class="card-title">Streak</h5>
-    <p class="card-text">
-      Current streak:
-    </p>
+  <div class="mb-4 text-center border rounded p-4">
+    <h5 class="card-title">Streak Counter and Setter</h5>
+    <p class="card-text">Current streak:</p>
     <h1>
       <span id="currentStreak">
         <?php echo getCurrentStreak($conn, $_SESSION['user_id']); ?>
       </span> days
     </h1>
-    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#streakModal">Set Streak</button>
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#streakModal">Pick a Date</button>
     <form action="resetstreak.php" method="POST" class="d-inline">
-      <button type="submit" class="btn btn-danger">Reset Streak</button>
+      <button type="submit" class="btn btn-danger">Reset to Today</button>
     </form>
   </div>
 </div>
   </div>
+
   <div class="row justify-content-center">
   <div class="col-md-4">
     <div class="mb-4 text-center">
@@ -96,10 +95,11 @@ include("attachtop.php");
     </div>
   </div>
 </div>
+<div class="border rounded p-4">
   <div class="row justify-content-center">
     <div class="col-md-4">
       <div class="mb-4 text-center">
-        <h5 class="card-title">Streak Goal</h5>
+        <h5 class="card-title">Target Streak</h5>
         <?php
             $userId = $_SESSION['user_id'];
 
@@ -125,7 +125,7 @@ include("attachtop.php");
 
     <div class="col-md-6">
       <div class="mb-4 text-center">
-        <h5 class="card-title">Progress to Streak Goal</h5>
+        <h5 class="card-title">Progress Towards Personal Target</h5>
         <?php
 
        
@@ -172,11 +172,12 @@ include("attachtop.php");
     </div>
 
   </div>
-
+  </div>
+  <div class="mt-5">
   <div class="row">
     <div class="col-md-12">
       <div>
-        <h3 class="card-title">Other Goals</h3>
+        <h2 class="card-title text-center">Goals</h2>
         <ul class="list-group">
           <?php
           include ("connection.php");
@@ -206,11 +207,19 @@ include("attachtop.php");
         </ul>
       </div>
     </div>
+    </div>
   </div>
 </div>
 <?php
 include("attachbottom.php");
 ?>
+
+
+
+
+
+
+
 <div class="modal fade" id="streakModal" tabindex="-1" aria-labelledby="streakModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
