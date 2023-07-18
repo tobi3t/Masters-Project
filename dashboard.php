@@ -6,20 +6,32 @@ include("attachtop.php");
   <h4 class="card-title">Dashboard</h4>
 </div>
 <div class="card-body">
-<div class="row justify-content-center">
+  <div class="row justify-content-center">
     <div class="col-md-4">
       <div class="mb-4 text-center">
         <h5 class="card-title">Points Earned</h5>
-        <p class="display-1 font-weight-bold">1000</p>
-
+        <p class="display-1 font-weight-bold">
+          <?php
+          include("connection.php");
+          $userId = $_SESSION['user_id'];
+            $query = "SELECT points FROM user_points WHERE user_id = $userId";
+            $result = mysqli_query($conn, $query);
+            
+            if ($result && mysqli_num_rows($result) > 0) {
+              $row = mysqli_fetch_assoc($result);
+              $points = $row['points'];
+              echo $points;
+            } else {
+              echo '0'; 
+            }
+          ?>
+        </p>
       </div>
     </div>
   </div>
-  <div class="row justify-content-center">
-    <?php
-
-  
-    include("connection.php");
+</div>
+<div class="row justify-content-center">
+  <?php
 
     function getCurrentStreak($conn, $userId) {
     $query = "SELECT streak_start_date FROM streaks WHERE user_id = ? ORDER BY streak_start_date DESC LIMIT 1";
@@ -34,7 +46,7 @@ include("attachtop.php");
 
       $presentDate = date("Y-m-d");
       $dateDiff = abs(strtotime($presentDate) - strtotime($streakStartDate));
-      $currentStreak = floor($dateDiff / (60 * 60 * 24)); // Convert seconds to days
+      $currentStreak = floor($dateDiff / (60 * 60 * 24)); 
 
       return $currentStreak;
     }
@@ -42,24 +54,24 @@ include("attachtop.php");
     return 0;
    }
    ?>
-   <div class="col-md-6">
-  <div class="mb-4 text-center border rounded p-4">
-    <h5 class="card-title">Streak Counter and Setter</h5>
-    <p class="card-text">Current streak:</p>
-    <h1>
-      <span id="currentStreak">
-        <?php echo getCurrentStreak($conn, $_SESSION['user_id']); ?>
-      </span> days
-    </h1>
-    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#streakModal">Pick a Date</button>
-    <form action="resetstreak.php" method="POST" class="d-inline">
-      <button type="submit" class="btn btn-danger">Reset to Today</button>
-    </form>
+  <div class="col-md-6">
+    <div class="mb-4 text-center border rounded p-4">
+      <h5 class="card-title">Streak Counter and Setter</h5>
+      <p class="card-text">Current streak:</p>
+      <h1>
+        <span id="currentStreak">
+          <?php echo getCurrentStreak($conn, $_SESSION['user_id']); ?>
+        </span> days
+      </h1>
+      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#streakModal">Pick a Date</button>
+      <form action="resetstreak.php" method="POST" class="d-inline">
+        <button type="submit" class="btn btn-danger">Reset to Today</button>
+      </form>
+    </div>
   </div>
 </div>
-  </div>
 
-  <div class="row justify-content-center">
+<div class="row justify-content-center">
   <div class="col-md-4">
     <div class="mb-4 text-center">
       <h5 class="card-title">Badges</h5>
@@ -125,7 +137,7 @@ include("attachtop.php");
 
     <div class="col-md-6">
       <div class="mb-4 text-center">
-        <h5 class="card-title">Progress Towards Personal Target</h5>
+        <h5 class="card-title">Progress Towards Target Streak</h5>
         <?php
 
        
@@ -172,8 +184,8 @@ include("attachtop.php");
     </div>
 
   </div>
-  </div>
-  <div class="mt-5">
+</div>
+<div class="mt-5">
   <div class="row">
     <div class="col-md-12">
       <div>
@@ -207,18 +219,12 @@ include("attachtop.php");
         </ul>
       </div>
     </div>
-    </div>
   </div>
+</div>
 </div>
 <?php
 include("attachbottom.php");
 ?>
-
-
-
-
-
-
 
 <div class="modal fade" id="streakModal" tabindex="-1" aria-labelledby="streakModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
@@ -239,8 +245,3 @@ include("attachbottom.php");
     </div>
   </div>
 </div>
-
-
-
-
-
