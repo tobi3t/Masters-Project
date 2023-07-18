@@ -7,62 +7,162 @@ include("attachtop.php");
 </div>
 <div class="card-body">
   <div class="row">
-    <div class="col-md-6">
-      <div class="mb-4">
-        <h5 class="card-title">Streak</h5>
-        <p class="card-text">Current streak: <span id="currentStreak">7</span> days</p>
-        <button class="btn btn-primary">Set Streak</button>
-        <button class="btn btn-danger">Reset Streak</button>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="mb-4">
-        <h5 class="card-title">Progress</h5>
-        <div class="progress">
-          <div class="progress-bar bg-success" role="progressbar" style="width: 70%;" aria-valuenow="70"
-            aria-valuemin="0" aria-valuemax="100">70%</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row justify-content-center">
-    <div class="col-md-4">
-      <div class="mb-4 text-center">
-        <h5 class="card-title">Points Earned</h5>
-        <p class="display-1 font-weight-bold">1000</p>
-      </div>
-    </div>
-  </div>
-  <div class="row justify-content-center">
-    <div class="col-md-12">
-      <div class="mb-4 d-flex flex-column align-items-center">
-        <h5 class="card-title">Badges Earned</h5>
-        <div class="h1 mb-3">
-          <i class="bi bi-laptop"></i>
-          <small class="text-center">WK</small>
-        </div>
-        <div class="h1 mb-3">
-          <i class="bi bi-person-square"></i>
-          <small class="text-center">MT</small>
-        </div>
-        <div class="h1 mb-3">
-          <i class="bi bi-people"></i>
-          <small class="text-center">YR</small>
-        </div>
-      </div>
-    </div>
 
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <div>
-        <h5 class="card-title">Goals</h5>
-        <ul class="list-group">
-          <li class="list-group-item">Goal 1</li>
-          <li class="list-group-item">Goal 2</li>
-          <li class="list-group-item">Goal 3</li>
-        </ul>
+
+  <div class="container">
+    <h1>Quiz Questions</h1>
+    
+    <!-- Quiz Question 1 -->
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="card-title">Question 1</h5>
+        <p class="card-text">This is the question text for Question 1.</p>
+        
+        <!-- Options for Question 1 -->
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="question1" id="q1-option1">
+          <label class="form-check-label" for="q1-option1">Option 1</label>
+        </div>
+        
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="question1" id="q1-option2">
+          <label class="form-check-label" for="q1-option2">Option 2</label>
+        </div>
+        
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="question1" id="q1-option3">
+          <label class="form-check-label" for="q1-option3">Option 3</label>
+        </div>
+        
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="question1" id="q1-option4">
+          <label class="form-check-label" for="q1-option4">Option 4</label>
+        </div>
       </div>
+    </div>
+    
+    <!-- Quiz Question 2 -->
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="card-title">Question 2</h5>
+        <p class="card-text">This is the question text for Question 2.</p>
+        
+        <!-- Options for Question 2 -->
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="question2" id="q2-option1">
+          <label class="form-check-label" for="q2-option1">Option 1</label>
+        </div>
+        
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="question2" id="q2-option2">
+          <label class="form-check-label" for="q2-option2">Option 2</label>
+        </div>
+        
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="question2" id="q2-option3">
+          <label class="form-check-label" for="q2-option3">Option 3</label>
+        </div>
+        
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="question2" id="q2-option4">
+          <label class="form-check-label" for="q2-option4">Option 4</label>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Quiz Question 3 -->
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="card-title">Question 3</h5>
+        <p class="card-text">This is the question text for Question 3.</p>
+        
+        <!-- Options for Question 3 -->
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="question3" id="q3-option1">
+          <label class="form-check-label" for="q3-option1">Option 1</label>
+        </div>
+        
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="question3" id="q3-option2">
+          <label class="form-check-label" for="q3-option2">Option 2</label>
+        </div>
+        
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="question3" id="q3-option3">
+          <label class="form-check-label" for="q3-option3">Option 3</label>
+        </div>
+        
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="question3" id="q3-option4">
+          <label class="form-check-label" for="q3-option4">Option 4</label>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Quiz Question 4 -->
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="card-title">Question 4</h5>
+        <p class="card-text">This is the question text for Question 4.</p>
+        
+        <!-- Options for Question 4 -->
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="question4" id="q4-option1">
+          <label class="form-check-label" for="q4-option1">Option 1</label>
+        </div>
+        
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="question4" id="q4-option2">
+          <label class="form-check-label" for="q4-option2">Option 2</label>
+        </div>
+        
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="question4" id="q4-option3">
+          <label class="form-check-label" for="q4-option3">Option 3</label>
+        </div>
+        
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="question4" id="q4-option4">
+          <label class="form-check-label" for="q4-option4">Option 4</label>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Quiz Question 5 -->
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="card-title">Question 5</h5>
+        <p class="card-text">This is the question text for Question 5.</p>
+        
+        <!-- Options for Question 5 -->
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="question5" id="q5-option1">
+          <label class="form-check-label" for="q5-option1">Option 1</label>
+        </div>
+        
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="question5" id="q5-option2">
+          <label class="form-check-label" for="q5-option2">Option 2</label>
+        </div>
+        
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="question5" id="q5-option3">
+          <label class="form-check-label" for="q5-option3">Option 3</label>
+        </div>
+        
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="question5" id="q5-option4">
+          <label class="form-check-label" for="q5-option4">Option 4</label>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-primary">Submit</button>
+    
+  </div>
+
+
     </div>
   </div>
 </div>
