@@ -28,14 +28,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['username'] = $user['username'];
             $_SESSION['email'] = $email;
 
-            header('Location: dashboard.php');
+            $adminEmails = array('admin1@measurerecovery.com', 'admin2@measurerecovery.com', 'admin3@measurerecovery.com');
+            if (in_array($email, $adminEmails)) {
+                header('Location: admin.php');
+            } else {
+                header('Location: dashboard.php');
+            }
             exit();
         } else {
-           
             header('Location: signin.html');
         }
     } else {
-      
         header('Location: signin.html');
     }
 
