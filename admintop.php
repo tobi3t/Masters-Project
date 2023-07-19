@@ -55,7 +55,7 @@ $conn->close();
         <div class="collapse navbar-collapse" id="menunav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="dashboard.php">Dashboard</a>
+              <a class="nav-link" aria-current="page" href="admin.php">Admin Portal</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="logout.php">Logout</a>
@@ -71,11 +71,9 @@ $conn->close();
             <div class="card-header">Welcome, <?php echo $firstname; ?></div>
             <div class="card-body">
               <ul class="list-group">
-                <li class="list-group-item"><a href="dashboard.php">Dashboard</a></li>
-                <li class="list-group-item"><a href="goals.php">Goal Setting</a></li>
-                <li class="list-group-item"><a href="forum.php">Forum</a></li>
-                <li class="list-group-item"><a href="quiz.php">Quiz</a></li>
-                <li class="list-group-item"><a href="resources.php">Resources</a></li>
+                <li class="list-group-item"><a href="admin.php">Admin Portal</a></li>
+                <li class="list-group-item"><a href="quizsetter.php">Quiz Setter</a></li>
+                <li class="list-group-item"><a href="feedback.php">Feedback</a></li>
               </ul>
             </div>
           </div>
