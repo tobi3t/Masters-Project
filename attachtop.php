@@ -39,7 +39,7 @@ $conn->close();
 
 <body>
   <div class="content">
-    <nav class="navbar navbar-expand-md navbar-dark py-4 bg-dark">
+    <nav class="navbar navbar-expand-md navbar-dark py-4 bg-primary">
       <div class="container-fluid">
         <a class="navbar-brand" href="index.html">MeasureRecovery</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menunav">

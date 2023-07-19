@@ -3,7 +3,7 @@
         </div>
     </div>
 </div>
-<footer class="footer bg-dark text-white py-4">
+<footer class="footer bg-primary text-white py-4">
     <div class="container">
         <div class="text-center">
             <p class="mb-0">&copy; 2023 MeasureRecovery. All rights reserved.</p>
