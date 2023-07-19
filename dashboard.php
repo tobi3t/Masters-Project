@@ -93,9 +93,21 @@ include("attachtop.php");
         if ($currentStreak >= 60) {
           echo '<i class="bi bi-award-fill" style="color: gold;"></i>';
         }
-  
+
         if ($currentStreak >= 90) {
           echo '<i class="bi bi-award-fill" style="color: gold;"></i>';
+        }
+      
+        if ($currentStreak >= 365) {
+          echo '<i class="bi bi-trophy-fill" style="color: gold;"></i>';
+        }
+      
+        if ($currentStreak >= 1095) {
+          echo '<i class="bi bi-gem" style="color: #00FF00;"></i>';
+        }
+
+        if ($currentStreak >= 1825) {
+          echo '<i class="bi bi-gem" style="color: #00FF00;"></i>';
         }
 
         if ($currentStreak > 6 && $currentStreak < 30) {
