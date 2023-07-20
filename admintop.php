@@ -71,9 +71,9 @@ $conn->close();
             <div class="card-header">Welcome, <?php echo $firstname; ?></div>
             <div class="card-body">
               <ul class="list-group">
-                <li class="list-group-item"><a href="admin.php">Admin Portal</a></li>
-                <li class="list-group-item"><a href="quizsetter.php">Quiz Setter</a></li>
-                <li class="list-group-item"><a href="feedback.php">Feedback</a></li>
+                <li class="list-group-item"><a href="admin.php">Manage Articles</a></li>
+                <li class="list-group-item"><a href="adminquiz.php">Manage Quiz Questions</a></li>
+                <li class="list-group-item"><a href="feedback.php">Manage Feedback</a></li>
               </ul>
             </div>
           </div>
