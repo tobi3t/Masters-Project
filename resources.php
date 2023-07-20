@@ -37,17 +37,20 @@ $conn->close();
 
 
 
-    <div class="container mt-3">
-        <h4 class="mb-4">Download PDFs</h4>
+        <div class="container mt-4">
+        <h4 class="mb-4">PDFs</h4>
         <ul class="list-group">
             <li class="list-group-item">
-                <a href="pdfs/sample1.pdf" download>Download Sample PDF 1</a>
+            
+                <a href="download_pdf.php?pdf=sample1.pdf">Sample 1</a>
             </li>
             <li class="list-group-item">
-                <a href="pdfs/sample2.pdf" download>Download Sample PDF 2</a>
+            
+                <a href="download_pdf.php?pdf=sample2.pdf">Sample 2</a>
             </li>
         </ul>
     </div>
+
 
 
     </div>
