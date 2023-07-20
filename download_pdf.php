@@ -10,17 +10,27 @@ if (isset($_SESSION['user_id'])) {
         $pdf_path = 'pdfs/' . $pdf_file;
 
         if (file_exists($pdf_path)) {
-           
-            $update_points_sql = "UPDATE user_points SET points = points + 2 WHERE user_id = $user_id";
-            if ($conn->query($update_points_sql) === TRUE) {
-               
-                header('Content-Description: File Transfer');
-                header('Content-Type: application/octet-stream');
-                header('Content-Disposition: attachment; filename="' . $pdf_file . '"');
-                readfile($pdf_path);
-                exit;
+
+            $already_earned_points = isset($_SESSION['earned_points'][$pdf_file]);
+
+            if (!$already_earned_points) {
+        
+                $update_points_sql = "UPDATE user_points SET points = points + 2 WHERE user_id = $user_id";
+                if ($conn->query($update_points_sql) === TRUE) {
+    
+                    $_SESSION['earned_points'][$pdf_file] = true;
+
+                    header('Content-Description: File Transfer');
+                    header('Content-Type: application/octet-stream');
+                    header('Content-Disposition: attachment; filename="' . $pdf_file . '"');
+                    readfile($pdf_path);
+                    exit;
+                } else {
+                    echo "Error updating points: " . $conn->error;
+                }
             } else {
-                echo "Error updating points: " . $conn->error;
+    
+                echo header('Location: resources.php');
             }
         } else {
             echo "File not found.";
@@ -29,7 +39,7 @@ if (isset($_SESSION['user_id'])) {
         echo "Invalid request.";
     }
 } else {
-    
+
     header('Location: signin.html');
     exit;
 }
