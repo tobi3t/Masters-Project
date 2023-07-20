@@ -16,11 +16,12 @@ $conn->close();
 ?>
 
 <div class="card-header">
-    <h4 class="card-title">Articles</h4>
+    <h4 class="card-title">Resources</h4>
 </div>
 <div class="card-body">
     <div class="row">
         <div class="container">
+        <h4 class="mb-4">Articles</h4>
             <ul class="list-group">
                 <?php if (!empty($articles)): ?>
                     <?php foreach ($articles as $article): ?>
@@ -33,6 +34,22 @@ $conn->close();
                 <?php endif; ?>
             </ul>
         </div>
+
+
+
+    <div class="container mt-3">
+        <h4 class="mb-4">Download PDFs</h4>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a href="pdfs/sample1.pdf" download>Download Sample PDF 1</a>
+            </li>
+            <li class="list-group-item">
+                <a href="pdfs/sample2.pdf" download>Download Sample PDF 2</a>
+            </li>
+        </ul>
+    </div>
+
+
     </div>
 </div>
 
