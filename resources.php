@@ -1,8 +1,5 @@
 <?php
 include("attachtop.php");
-?>
-
-<?php
 include("connection.php");
 
 $stmt = $conn->prepare("SELECT * FROM articles");
@@ -14,7 +11,6 @@ $stmt->close();
 
 $conn->close();
 ?>
-
 <div class="card-header">
     <h4 class="card-title">Resources</h4>
 </div>
@@ -34,9 +30,6 @@ $conn->close();
                 <?php endif; ?>
             </ul>
         </div>
-
-
-
         <div class="container mt-4">
         <h4 class="mb-4">PDFs</h4>
         <ul class="list-group">
@@ -50,9 +43,6 @@ $conn->close();
             </li>
         </ul>
     </div>
-
-
-
     </div>
 </div>
 
