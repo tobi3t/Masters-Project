@@ -216,11 +216,19 @@ include("attachtop.php");
               $title = $row['title'];
           ?>
           <li class="list-group-item d-flex justify-content-between align-items-center">
-            <?php echo $title; ?>
-            <form action="deletegoal.php" method="POST" class="d-inline">
-              <input type="hidden" name="goal_id" value="<?php echo $goalId; ?>">
-              <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-            </form>
+            <div>
+              <?php echo $title; ?>
+            </div>
+            <div>
+              <form action="deletegoal.php" method="POST" class="d-inline">
+                <input type="hidden" name="goal_id" value="<?php echo $goalId; ?>">
+                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+              </form>
+              <form action="completed.php" method="POST" class="d-inline">
+                <input type="hidden" name="goal_id" value="<?php echo $goalId; ?>">
+                <button type="submit" class="btn btn-success btn-sm">Completed</button>
+              </form>
+            </div>
           </li>
           <?php
             }
