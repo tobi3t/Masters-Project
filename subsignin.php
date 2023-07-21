@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $adminEmails = array('admin1@measurerecovery.com', 'admin2@measurerecovery.com', 'admin3@measurerecovery.com');
             if (in_array($email, $adminEmails)) {
-                header('Location: admin.php');
+                header('Location: adminarticles.php');
             } else {
                 header('Location: dashboard.php');
             }

@@ -33,15 +33,25 @@ $conn->close();
         <div class="container mt-4">
         <h4 class="mb-4">PDFs</h4>
         <ul class="list-group">
-            <li class="list-group-item">
+        <?php
+        $pdf_folder = 'pdfs/';
+        $pdf_files = scandir($pdf_folder);
+
+        foreach ($pdf_files as $pdf_file) {
             
-                <a href="download_pdf.php?pdf=sample1.pdf">Sample 1</a>
-            </li>
-            <li class="list-group-item">
-            
-                <a href="download_pdf.php?pdf=sample2.pdf">Sample 2</a>
-            </li>
-        </ul>
+            if ($pdf_file === '.' || $pdf_file === '..') {
+                continue;
+            }
+
+            $file_extension = strtolower(pathinfo($pdf_folder . $pdf_file, PATHINFO_EXTENSION));
+            if ($file_extension === 'pdf') {
+                echo '<li class="list-group-item">';
+                echo '<a href="download_pdf.php?pdf=' . urlencode($pdf_file) . '">' . $pdf_file . '</a>';
+                echo '</li>';
+            }
+        }
+        ?>
+    </ul>
     </div>
     </div>
 </div>
