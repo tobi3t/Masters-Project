@@ -3,18 +3,12 @@ include("admintop.php");
 ?>
 
 <div class="card-header">
-    <h4 class="card-title">Manage Articles</h4>
+    <h4 class="card-title">Quiz Questions</h4>
 </div>
 <div class="card-body">
     <div class="row">
 
-        <div class="container mt-4">
-            <h1 class="mb-4">Articles</h1>
-            <ul class="list-group">
-
-
 <div class="container mt-4">
-        <h1 class="mb-4">Quiz Questions</h1>
         <div id="quiz">
         <?php
 
@@ -57,7 +51,7 @@ include("admintop.php");
             
         </div>
 
-        <h2 class="mt-4">Add New Quiz Question</h2>
+        <h4 class="mt-3">Add New Quiz Question</h4>
         <form action="addquiz.php" method="post">
             <div class="form-group">
                 <label for="question_text">Question Text:</label>
