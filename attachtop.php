@@ -64,6 +64,7 @@ $conn->close();
             <div class="card-header">Welcome, <?php echo $firstname; ?></div>
             <div class="card-body">
               <ul class="list-group">
+                <li class="list-group-item"><a href="welcome.php">Welcome</a></li>
                 <li class="list-group-item"><a href="dashboard.php">Dashboard</a></li>
                 <li class="list-group-item"><a href="goals.php">Goal Setting</a></li>
                 <li class="list-group-item"><a href="forum.php">Forum</a></li>
