@@ -8,7 +8,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $comment_content = $_POST['comment_content'];
         $message_id = $_POST['message_id'];
-
         $comment_content = htmlspecialchars(trim($comment_content));
 
         $sql = "INSERT INTO comments (content, user_id, message_id) VALUES ('$comment_content', $user_id, $message_id)";
