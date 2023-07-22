@@ -33,6 +33,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bind_param('sssss', $firstname, $lastname, $username, $email, $hashedPassword);
 
     if ($stmt->execute()) {
+        $user_id = $stmt->insert_id;
+
+        $points = 100;
+        $stmt = $conn->prepare('INSERT INTO user_points (user_id, points) VALUES (?, ?)');
+        $stmt->bind_param('ii', $user_id, $points);
+        $stmt->execute();
+
         header('Location: signin.html');
         exit();
     } else {

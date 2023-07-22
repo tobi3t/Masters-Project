@@ -1,6 +1,7 @@
 <?php
 include("attachtop.php");
 include("functions.php");
+include("connection.php");
 ?>
 
 <div class="card-header">
@@ -13,7 +14,7 @@ include("functions.php");
         <h5 class="card-title">Points Earned</h5>
         <p class="display-1 font-weight-bold">
           <?php
-          include("connection.php");
+
           $userId = $_SESSION['user_id'];
             $query = "SELECT points FROM user_points WHERE user_id = $userId";
             $result = mysqli_query($conn, $query);
@@ -48,6 +49,28 @@ include("functions.php");
     </div>
   </div>
 </div>
+
+
+<div class="modal fade" id="streakModal" tabindex="-1" aria-labelledby="streakModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="streakModalLabel">Set Streak Start Date</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="setstreak.php" method="POST">
+          <div class="mb-3">
+            <label for="startDateInput" class="form-label">Start Date</label>
+            <input type="date" class="form-control" id="startDateInput" name="startDate" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <div class="row justify-content-center">
   <div class="col-md-4">
@@ -182,7 +205,6 @@ include("functions.php");
         <h2 class="card-title text-center">Goals</h2>
         <ul class="list-group">
           <?php
-          include ("connection.php");
 
           $userId = $_SESSION['user_id'];
           $query = "SELECT * FROM goals WHERE user_id = $userId";
@@ -223,23 +245,3 @@ include("functions.php");
 <?php
 include("attachbottom.php");
 ?>
-
-<div class="modal fade" id="streakModal" tabindex="-1" aria-labelledby="streakModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="streakModalLabel">Set Streak Start Date</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form action="setstreak.php" method="POST">
-          <div class="mb-3">
-            <label for="startDateInput" class="form-label">Start Date</label>
-            <input type="date" class="form-control" id="startDateInput" name="startDate" required>
-          </div>
-          <button type="submit" class="btn btn-primary">Save</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>

@@ -1,5 +1,7 @@
 <?php
 include("attachtop.php");
+include("connection.php");
+include("functions.php");
 ?>
 
 <div class="card-header">
@@ -17,10 +19,6 @@ include("attachtop.php");
         </form><br>
 
         <?php
-
-        include("connection.php");
-        include("functions.php");
-
         $sql = "SELECT * FROM chat_messages ORDER BY creation_date DESC";
         $result = $conn->query($sql);
 

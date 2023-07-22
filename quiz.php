@@ -1,5 +1,6 @@
 <?php
 include("attachtop.php");
+include("connection.php");
 ?>
 
 <div class="card-header">
@@ -8,9 +9,7 @@ include("attachtop.php");
 <div class="card-body">
     <div class="row">
 
-
-        <?php
-include("connection.php");
+    <?php
 
 $sql = "SELECT * FROM quiz";
 $result = $conn->query($sql);
@@ -39,21 +38,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $user_id = $_SESSION['user_id'];
 
-    $sql = "SELECT * FROM user_points WHERE user_id = '$user_id'";
-    $result = $conn->query($sql);
+    $stmt = $conn->prepare("SELECT * FROM user_points WHERE user_id = ?");
+    $stmt->bind_param('i', $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
-       
         $row = $result->fetch_assoc();
         $points = $row['points'] + $score;
-        $sql = "UPDATE user_points SET points = '$points', score = '$score' WHERE user_id = '$user_id'";
+
+        $stmt = $conn->prepare("UPDATE user_points SET points = ?, score = ? WHERE user_id = ?");
+        $stmt->bind_param('iii', $points, $score, $user_id);
     } else {
-        
-        $sql = "INSERT INTO user_points (user_id, points, score) VALUES ('$user_id', '$score', '$score')";
+        $stmt = $conn->prepare("INSERT INTO user_points (user_id, points, score) VALUES (?, ?, ?)");
+        $stmt->bind_param('iii', $user_id, $score, $score);
     }
-    
-    if ($conn->query($sql) === TRUE) {
-        
+
+    if ($stmt->execute()) {
+        $stmt->close();
+
         header("Location: result.php");
         exit();
     } else {
@@ -63,6 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 $conn->close();
 ?>
+
 
         <div class="container">
             <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">

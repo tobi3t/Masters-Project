@@ -19,8 +19,43 @@ function getCurrentStreak($conn, $userId) {
 
     return 0;
    }
+
+function getArticles($conn) {
+    $stmt = $conn->prepare("SELECT * FROM articles");
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $articles = $result->fetch_all(MYSQLI_ASSOC);
+    $stmt->close();
+    return $articles;
+}
+
+function scanPdfFiles($pdf_folder) {
+    $pdf_files = scandir($pdf_folder);
+    foreach ($pdf_files as $pdf_file) {
+        if ($pdf_file === '.' || $pdf_file === '..') {
+            continue;
+        }
+        $file_extension = strtolower(pathinfo($pdf_folder . $pdf_file, PATHINFO_EXTENSION));
+        if ($file_extension === 'pdf') {
+            echo '<li class="list-group-item">';
+            echo '<a href="download_pdf.php?pdf=' . urlencode($pdf_file) . '">' . htmlspecialchars($pdf_file) . '</a>';
+            echo '</li>';
+        }
+    }
+}
+
+function getUserGoals($conn, $userId) {
+    $query = "SELECT * FROM goals WHERE user_id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param('i', $userId);
+    $stmt->execute();
+    return $stmt->get_result();
+}
+
+
 function get_user_by_id($conn, $user_id) {
     $sql = "SELECT * FROM users WHERE id = $user_id";
     $result = $conn->query($sql);
     return ($result->num_rows > 0) ? $result->fetch_assoc() : null;
 }
+?>

@@ -1,25 +1,19 @@
 <?php
 include("attachtop.php");
+include("connection.php");
+include("functions.php");
+$userId = $_SESSION['user_id'];
+$result = getUserGoals($conn, $userId);
 ?>
 
 <div class="card-header">
   <h4 class="card-title">Manage Goals</h4>
 </div>
 
-<?php
-include("connection.php");
-
-$userId = $_SESSION['user_id'];
-$query = "SELECT * FROM goals WHERE user_id = $userId";
-$result = mysqli_query($conn, $query);
-
-?>
-
 <div class="card-body">
   <div id="accordion">
 
     <?php
-  
     while ($row = mysqli_fetch_assoc($result)) {
       $goalId = $row['id'];
       $title = $row['title'];
@@ -51,23 +45,23 @@ $result = mysqli_query($conn, $query);
     <div class="col-md-9">
       <div class="mt-4">
         <div class="card">
-        <div class="card-header">
-          <h4 class="card-title">Add New Goal</h4>
+          <div class="card-header">
+            <h4 class="card-title">Add New Goal</h4>
+          </div>
+          <div class="card-body">
+            <form action="addgoals.php" method="POST">
+              <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-control" id="title" name="title" required>
+              </div>
+              <div class="mb-3">
+                <label for="details" class="form-label">Details</label>
+                <textarea class="form-control" id="details" name="details"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Add Goal</button>
+            </form>
+          </div>
         </div>
-        <div class="card-body">
-          <form action="addgoals.php" method="POST">
-            <div class="mb-3">
-              <label for="title" class="form-label">Title</label>
-              <input type="text" class="form-control" id="title" name="title" required>
-            </div>
-            <div class="mb-3">
-              <label for="details" class="form-label">Details</label>
-              <textarea class="form-control" id="details" name="details"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Add Goal</button>
-          </form>
-        </div>
-  </div>
       </div>
     </div>
     <div class="col-md-3">
