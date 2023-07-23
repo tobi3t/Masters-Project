@@ -15,7 +15,7 @@ $stmt = $conn->prepare("INSERT INTO articles (article_title, article_body, user_
 $stmt->bind_param("ssi", $title, $body, $user_id);
 
 if ($stmt->execute()) {
-    header('Location: admin.php');
+    header('Location: adminarticles.php');
 } else {
     echo '<div class="alert alert-danger" role="alert">Error adding the article: ' . $stmt->error . '</div>';
 }

@@ -13,20 +13,36 @@ include("connection.php");
       <div class="mb-4 text-center">
         <h5 class="card-title">Points Earned</h5>
         <p class="display-1 font-weight-bold">
-          <?php
+        <?php
 
-          $userId = $_SESSION['user_id'];
-            $query = "SELECT points FROM user_points WHERE user_id = $userId";
-            $result = mysqli_query($conn, $query);
-            
-            if ($result && mysqli_num_rows($result) > 0) {
-              $row = mysqli_fetch_assoc($result);
-              $points = $row['points'];
-              echo $points;
-            } else {
-              echo '0'; 
-            }
-          ?>
+        $userId = $_SESSION['user_id'];
+        $query = "SELECT points FROM user_points WHERE user_id = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param('i', $userId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result && $result->num_rows > 0) {
+          $row = $result->fetch_assoc();
+          $points = $row['points'];
+
+ 
+          if ($points <= 300) {
+            $level = "Seeker";
+          } elseif ($points <= 1000) {
+            $level = "Striver";
+          } elseif ($points <= 5000) {
+            $level = "Warrior";
+          } else {
+            $level = "Conqueror";
+          }
+
+          echo htmlspecialchars($points);
+        } else {
+          echo '0';
+        }
+        ?>
+        <h3><span class="text-muted">Level: <?php echo htmlspecialchars($level); ?></span></h3>
         </p>
       </div>
     </div>
@@ -204,17 +220,20 @@ include("connection.php");
       <div>
         <h2 class="card-title text-center">Goals</h2>
         <ul class="list-group">
-          <?php
+        <?php
+        $userId = $_SESSION['user_id'];
+        $query = "SELECT * FROM goals WHERE user_id = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param('i', $userId);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-          $userId = $_SESSION['user_id'];
-          $query = "SELECT * FROM goals WHERE user_id = $userId";
-          $result = mysqli_query($conn, $query);
-
-          if (mysqli_num_rows($result) > 0) {
-            while ($row = mysqli_fetch_assoc($result)) {
-              $goalId = $row['id'];
-              $title = $row['title'];
-          ?>
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $goalId = htmlspecialchars($row['id']);
+                $title = htmlspecialchars($row['title']);
+       
+        ?>
           <li class="list-group-item d-flex justify-content-between align-items-center">
             <div>
               <?php echo $title; ?>

@@ -24,16 +24,19 @@ include("functions.php");
 
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                $message_id = $row['message_id'];
-                $content = $row['content'];
-                $user_id = $row['user_id'];
-                $creation_date = $row['creation_date'];
+                $message_id = htmlspecialchars($row['message_id']);
+                $content = htmlspecialchars($row['content']);
+                $user_id = htmlspecialchars($row['user_id']);
+                $creation_date = htmlspecialchars($row['creation_date']);
 
                 $user = get_user_by_id($conn, $user_id);
-                $username = $user['username'];
+                $username = htmlspecialchars($user['username']);
 
-                $comments_sql = "SELECT * FROM comments WHERE message_id = $message_id ORDER BY creation_date";
-                $comments_result = $conn->query($comments_sql);
+                $comments_sql = "SELECT * FROM comments WHERE message_id = ? ORDER BY creation_date";
+                $stmt = $conn->prepare($comments_sql);
+                $stmt->bind_param('i', $message_id);
+                $stmt->execute();
+                $comments_result = $stmt->get_result();
                 ?>
 
                 <div class="card mb-3">

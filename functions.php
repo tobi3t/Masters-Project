@@ -29,6 +29,13 @@ function getArticles($conn) {
     return $articles;
 }
 
+
+function sanitize_input($data) {
+    $data = trim($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+
 function scanPdfFiles($pdf_folder) {
     $pdf_files = scandir($pdf_folder);
     foreach ($pdf_files as $pdf_file) {
@@ -54,8 +61,12 @@ function getUserGoals($conn, $userId) {
 
 
 function get_user_by_id($conn, $user_id) {
-    $sql = "SELECT * FROM users WHERE id = $user_id";
-    $result = $conn->query($sql);
+    $sql = "SELECT * FROM users WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('i', $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
     return ($result->num_rows > 0) ? $result->fetch_assoc() : null;
 }
 ?>

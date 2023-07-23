@@ -13,7 +13,7 @@ $stmt = $conn->prepare("DELETE FROM articles WHERE id = ?");
 $stmt->bind_param("i", $article_id);
 
 if ($stmt->execute()) {
-    header('Location: admin.php');
+    header('Location: adminarticles.php');
 } else {
     echo '<div class="alert alert-danger" role="alert">Error deleting the article: ' . $stmt->error . '</div>';
 }

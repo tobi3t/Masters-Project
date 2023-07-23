@@ -12,37 +12,59 @@ include("admintop.php");
             <h1 class="mb-4">Articles</h1>
             <ul class="list-group">
 
-                <?php
+            <?php
+include("connection.php");
 
-                include("connection.php");
+$conn = new mysqli($servername, $username, $password, $dbname);
 
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
-                $conn = new mysqli($servername, $username, $password, $dbname);
+$sql = "SELECT id, article_title FROM articles";
+$result = $conn->query($sql);
 
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $article_id = $row["id"];
+        $article_title = $row["article_title"];
 
-                if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-                }
+        echo '<li class="list-group-item d-flex justify-content-between align-items-center">';
+        echo $article_title;
 
-                $sql = "SELECT id, article_title FROM articles";
-                $result = $conn->query($sql);
+        echo '<button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal' . $article_id . '">Delete</button>';
 
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        echo '<li class="list-group-item d-flex justify-content-between align-items-center">';
-                        echo $row["article_title"];
-                        echo '<form action="delete_article.php" method="post">';
-                        echo '<input type="hidden" name="article_id" value="' . $row["id"] . '">';
-                        echo '<button type="submit" class="btn btn-danger btn-sm">Delete</button>';
-                        echo '</form>';
-                        echo '</li>';
-                    }
-                } else {
-                    echo '<li class="list-group-item">No articles found.</li>';
-                }
+        echo '</li>';
 
-                $conn->close();
-                ?>
+        echo '<div class="modal fade" id="deleteModal' . $article_id . '" tabindex="-1" aria-labelledby="deleteModalLabel' . $article_id . '" aria-hidden="true">';
+        echo '<div class="modal-dialog">';
+        echo '<div class="modal-content">';
+        echo '<div class="modal-header">';
+        echo '<h5 class="modal-title" id="deleteModalLabel' . $article_id . '">Confirm Delete</h5>';
+        echo '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>';
+        echo '</div>';
+        echo '<div class="modal-body">';
+        echo 'Are you sure you want to delete the article "' . $article_title . '"?';
+        echo '</div>';
+        echo '<div class="modal-footer">';
+        echo '<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>';
+        
+        echo '<form action="delete_article.php" method="post">';
+        echo '<input type="hidden" name="article_id" value="' . $article_id . '">';
+        echo '<button type="submit" class="btn btn-danger">Delete</button>';
+        echo '</form>';
+        
+        echo '</div>';
+        echo '</div>';
+        echo '</div>';
+        echo '</div>';
+    }
+} else {
+    echo '<li class="list-group-item">No articles found.</li>';
+}
+
+$conn->close();
+?>
 
 
             </ul>

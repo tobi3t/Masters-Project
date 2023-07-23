@@ -10,7 +10,8 @@ include("attachtop.php");
     <div class="card-body">
     <h4 class="text-center">Features</h4>
       <ul class="list-group">
-      <li class="list-group-item"><strong>Earn Points</strong> (For frequent engagement)</li>
+        <li class="list-group-item"><strong>Earn Points</strong> for frequent engagement</li>
+        <li class="list-group-item"><strong>Levels</strong> based on points earned</li>
         <li class="list-group-item"><strong>Daily Streak Monitoring</strong></li>
         <li class="list-group-item"><strong>Badges for reaching milestones</strong> (Set milestones: 1 week, 1 month, 2 months, 3 months, 1 year, 3 years and 5 years)</li>
         <li class="list-group-item"><strong>Goal setting capabilities</strong></li>

@@ -10,6 +10,13 @@ include("connection.php");
 
 $email = $_SESSION['email'];
 
+$adminEmails = array('admin1@measurerecovery.com', 'admin2@measurerecovery.com', 'admin3@measurerecovery.com');
+
+if (in_array($email, $adminEmails)) {
+  header("Location: adminarticles.php");
+  exit();
+}
+
 $stmt = $conn->prepare("SELECT first_name FROM users WHERE email = ?");
 $stmt->bind_param("s", $email);
 $stmt->execute();
