@@ -11,7 +11,6 @@ include("admintop.php");
 <div class="container mt-4">
         <div id="quiz">
         <?php
-
         include("connection.php");
 
         $conn = new mysqli($servername, $username, $password, $dbname);
@@ -34,19 +33,42 @@ include("admintop.php");
                 echo '<td>' . $row["option3"] . '</td>';
                 echo '<td>' . $row["option4"] . '</td>';
                 echo '<td>' . $row["correct_option"] . '</td>';
-                echo '<td><form action="deletequiz.php" method="post">';
-                echo '<input type="hidden" name="question_id" value="' . $row["question_id"] . '">';
-                echo '<button type="submit" class="btn btn-danger btn-sm">Delete</button>';
-                echo '</form></td>';
+                echo '<td>';
+                echo '<button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal' . $row["question_id"] . '">Delete</button>';
+                echo '</td>';
                 echo '</tr>';
-                }
-                echo '</table>';
-            } else {
-            echo '<div class="alert alert-warning" role="alert">No quiz questions found.</div>';
+
+                echo '<div class="modal fade" id="deleteModal' . $row["question_id"] . '" tabindex="-1" aria-labelledby="deleteModalLabel' . $row["question_id"] . '" aria-hidden="true">';
+                echo '<div class="modal-dialog">';
+                echo '<div class="modal-content">';
+                echo '<div class="modal-header">';
+                echo '<h5 class="modal-title" id="deleteModalLabel' . $row["question_id"] . '">Confirm Delete</h5>';
+                echo '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>';
+                echo '</div>';
+                echo '<div class="modal-body">';
+                echo 'Are you sure you want to delete the quiz question?';
+                echo '</div>';
+                echo '<div class="modal-footer">';
+                echo '<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>';
+
+                echo '<form action="deletequiz.php" method="post">';
+                echo '<input type="hidden" name="question_id" value="' . $row["question_id"] . '">';
+                echo '<button type="submit" class="btn btn-danger">Confirm</button>';
+                echo '</form>';
+
+                echo '</div>';
+                echo '</div>';
+                echo '</div>';
+                echo '</div>';
             }
+            echo '</table>';
+        } else {
+            echo '<div class="alert alert-warning" role="alert">No quiz questions found.</div>';
+        }
 
         $conn->close();
         ?>
+
 
             
         </div>
@@ -74,13 +96,8 @@ include("admintop.php");
                 <input type="text" class="form-control" name="option4" required>
             </div>
             <div class="form-group">
-                <label for="correct_option">Select Correct Option:</label>
-                <select class="form-control" name="correct_option" required>
-                    <option value="option1">Option 1</option>
-                    <option value="option2">Option 2</option>
-                    <option value="option3">Option 3</option>
-                    <option value="option4">Option 4</option>
-                </select>
+                <label for="correct_option">Correct Option:</label>
+                <input type="text" class="form-control" name="correct_option" required>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
