@@ -51,7 +51,7 @@ if ($result->num_rows > 0) {
         
         echo '<form action="delete_article.php" method="post">';
         echo '<input type="hidden" name="article_id" value="' . $article_id . '">';
-        echo '<button type="submit" class="btn btn-danger">Delete</button>';
+        echo '<button type="submit" class="btn btn-danger">Confirm</button>';
         echo '</form>';
         
         echo '</div>';

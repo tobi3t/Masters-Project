@@ -75,7 +75,7 @@ include("connection.php");
                 echo '<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>';
                 echo '<form method="POST" action="deletefeedback.php" style="display:inline;">'; 
                 echo '<input type="hidden" name="delete_feedback" value="' . $feedback_id . '">';
-                echo '<button type="submit" class="btn btn-danger">Delete</button>';
+                echo '<button type="submit" class="btn btn-danger">Confirm</button>';
                 echo '</form>';
                 echo '</div>';
                 echo '</div>';
