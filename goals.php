@@ -82,6 +82,7 @@ $result = getUserGoals($conn, $userId);
     </div>
   </div>
 </div>
+</div>
 
 <?php
 include("attachbottom.php");
