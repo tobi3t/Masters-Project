@@ -215,51 +215,97 @@ include("connection.php");
   </div>
 </div>
 <div class="mt-5">
-  <div class="row">
-    <div class="col-md-12">
-      <div>
-        <h2 class="card-title text-center">Goals</h2>
-        <ul class="list-group">
-        <?php
-        $userId = $_SESSION['user_id'];
-        $query = "SELECT * FROM goals WHERE user_id = ?";
-        $stmt = $conn->prepare($query);
-        $stmt->bind_param('i', $userId);
-        $stmt->execute();
-        $result = $stmt->get_result();
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                <h2 class="card-title text-center">Goals</h2>
+                <ul class="list-group">
+                    <?php
+                    $userId = $_SESSION['user_id'];
+                    $query = "SELECT * FROM goals WHERE user_id = ?";
+                    $stmt = $conn->prepare($query);
+                    $stmt->bind_param('i', $userId);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
 
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $goalId = htmlspecialchars($row['id']);
-                $title = htmlspecialchars($row['title']);
-       
-        ?>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            <div>
-              <?php echo $title; ?>
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            $goalId = htmlspecialchars($row['id']);
+                            $title = htmlspecialchars($row['title']);
+                            ?>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <?php echo $title; ?>
+                                </div>
+                                <div>
+                                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#deleteModal<?php echo $goalId; ?>">Delete</button>
+                                    <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#completedModal<?php echo $goalId; ?>">Completed</button>
+                                </div>
+                            </li>
+
+                            <div class="modal fade" id="deleteModal<?php echo $goalId; ?>" tabindex="-1"
+                                aria-labelledby="deleteModalLabel<?php echo $goalId; ?>" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="deleteModalLabel<?php echo $goalId; ?>">Confirm
+                                                Delete</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Are you sure you want to delete this goal?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Cancel</button>
+                                            <form action="deletegoal.php" method="POST" class="d-inline">
+                                                <input type="hidden" name="goal_id" value="<?php echo $goalId; ?>">
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal fade" id="completedModal<?php echo $goalId; ?>" tabindex="-1"
+                                aria-labelledby="completedModalLabel<?php echo $goalId; ?>" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="completedModalLabel<?php echo $goalId; ?>">Confirm
+                                                Completion</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Are you sure you want to mark this goal as completed?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Cancel</button>
+                                            <form action="completed.php" method="POST" class="d-inline">
+                                                <input type="hidden" name="goal_id" value="<?php echo $goalId; ?>">
+                                                <button type="submit" class="btn btn-success">Completed</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    <?php
+                        }
+                    } else {
+                        echo '<li class="list-group-item">No goals found.</li>';
+                    }
+                    ?>
+                </ul>
             </div>
-            <div>
-              <form action="deletegoal.php" method="POST" class="d-inline">
-                <input type="hidden" name="goal_id" value="<?php echo $goalId; ?>">
-                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-              </form>
-              <form action="completed.php" method="POST" class="d-inline">
-                <input type="hidden" name="goal_id" value="<?php echo $goalId; ?>">
-                <button type="submit" class="btn btn-success btn-sm">Completed</button>
-              </form>
-            </div>
-          </li>
-          <?php
-            }
-          } else {
-            echo '<li class="list-group-item">No goals found.</li>';
-          }
-          ?>
-        </ul>
-      </div>
+        </div>
     </div>
-  </div>
 </div>
+
 </div>
 <?php
 include("attachbottom.php");
