@@ -30,7 +30,7 @@ $leaderboardData = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $conn = null;
 ?>
-    <div class="container mt-5">
+    <div class="container">
         <table class="table table-striped table-bordered">
             <thead>
                 <tr>
