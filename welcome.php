@@ -39,12 +39,22 @@ include("attachtop.php");
 
   <div class="card mt-4">
     <div class="card-body">
+      <h4 class="text-center">Disclaimer</h4>
+      <p class="text-center font-weight-bold text-danger">
+        Important: This platform is not a substitute for professional help. If you feel you NEED professional assistance at any point in your journey, we strongly advise you to seek it out.
+      </p>
+    </div>
+  </div>
+
+  <div class="card mt-4">
+    <div class="card-body">
       <h4 class="text-center">User Discretion</h4>
       <p>
-        We value honesty and genuine engagement which is a necessary prerequisite to recovery. We encourage the use of this system in a manner that will contribute to your personal growth and recovery providing genuine feedback in the process. Remember, the true benefit lies in your honest efforts to improve yourself, and dishonesty only hinders your progress.
+      At MeasureRecovery, we value honesty and genuine engagement, which are essential for your recovery journey. We encourage you to use this system responsibly, contributing to your personal growth and recovery by engaging the site in a manner as to receive honest feedback throughout the process. Please remember, true progress comes from your sincere efforts to improve yourself, and dishonesty can hinder your journey.
+      </p>
       </p>
       <p>
-        <strong>Remember, this platform is here to empower you. Let's grow together and create a supportive community focused on personal development and recovery.</strong>
+      <strong>Our platform is here to empower you. Let's grow together and create a supportive community focused on personal development and recovery.</strong>
       </p>
     </div>
   </div>
