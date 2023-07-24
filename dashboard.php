@@ -263,7 +263,7 @@ include("connection.php");
                                                 data-bs-dismiss="modal">Cancel</button>
                                             <form action="deletegoal.php" method="POST" class="d-inline">
                                                 <input type="hidden" name="goal_id" value="<?php echo $goalId; ?>">
-                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                                <button type="submit" class="btn btn-danger">Confirm</button>
                                             </form>
                                         </div>
                                     </div>
@@ -288,7 +288,7 @@ include("connection.php");
                                                 data-bs-dismiss="modal">Cancel</button>
                                             <form action="completed.php" method="POST" class="d-inline">
                                                 <input type="hidden" name="goal_id" value="<?php echo $goalId; ?>">
-                                                <button type="submit" class="btn btn-success">Completed</button>
+                                                <button type="submit" class="btn btn-success">Goal Achieved</button>
                                             </form>
                                         </div>
                                     </div>
