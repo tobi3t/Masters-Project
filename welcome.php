@@ -39,7 +39,7 @@ include("attachtop.php");
 
   <div class="card mt-4">
     <div class="card-body">
-      <h4 class="text-center">Disclaimer</h4>
+      <h4 class="text-center">Medical Disclaimer</h4>
       <p class="text-center font-weight-bold text-danger">
         Important: This platform is not a substitute for professional help. If you feel you NEED professional assistance at any point in your journey, we strongly advise you to seek it out.
       </p>
