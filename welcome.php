@@ -2,11 +2,15 @@
 include("attachtop.php");
 ?>
 
-<div class="container mt-5">
-  <div class="card">
+
+</div>
+  <div class="col-lg-8">
+    <div class="card">
     <div class="card-header">
       <h4 class="text-center">Welcome!</h4>
-    </div>
+</div>
+<div class="container mt-4">
+  <div class="card">
     <div class="card-body">
     <h4 class="text-center">Features</h4>
       <ul class="list-group">

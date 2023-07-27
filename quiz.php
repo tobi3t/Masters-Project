@@ -2,7 +2,9 @@
 include("attachtop.php");
 include("connection.php");
 ?>
-
+</div>
+<div class="col-lg-8">
+<div class="card">
 <div class="card-header">
     <h4 class="card-title">Quiz</h4>
 </div>

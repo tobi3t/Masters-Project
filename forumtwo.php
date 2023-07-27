@@ -1,12 +1,36 @@
 <?php
 include("attachtop.php");
 include("connection.php");
-include("functions.php");
+function get_user_by_id($conn, $user_id) {
+    $sql = "SELECT * FROM users WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('i', $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    return ($result->num_rows > 0) ? $result->fetch_assoc() : null;
+}
 ?>
 
-</div>
-<div class="col-lg-8">
-<div class="card">
+
+
+<div class="card mb-4">
+            <div class="card-header">Welcome, <?php echo $firstname; ?></div>
+            <div class="card-body">
+              <ul class="list-group">
+                <li class="list-group-item"><a href="welcome.php">Welcome</a></li>
+                <li class="list-group-item"><a href="dashboard.php">Dashboard</a></li>
+                <li class="list-group-item"><a href="goals.php">Goal Setting</a></li>
+                <li class="list-group-item"><a href="forum.php">Forum</a></li>
+                <li class="list-group-item"><a href="quiz.php">Quiz</a></li>
+                <li class="list-group-item"><a href="resources.php">Resources</a></li>
+                <li class="list-group-item"><a href="forumtwo.php">Forum 2.0</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="card">
 
 <div class="card-header">
   <h4 class="card-title">Forum</h4>

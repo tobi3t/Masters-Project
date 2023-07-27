@@ -6,6 +6,10 @@ $userId = $_SESSION['user_id'];
 $result = getUserGoals($conn, $userId);
 ?>
 
+</div>
+<div class="col-lg-8">
+<div class="card">
+
 <div class="card-header">
   <h4 class="card-title">Manage Goals</h4>
 </div>

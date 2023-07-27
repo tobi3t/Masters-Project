@@ -77,10 +77,10 @@ $conn->close();
                 <li class="list-group-item"><a href="forum.php">Forum</a></li>
                 <li class="list-group-item"><a href="quiz.php">Quiz</a></li>
                 <li class="list-group-item"><a href="resources.php">Resources</a></li>
+                <li class="list-group-item"><a href="forumtwo.php">Forum 2.0</a></li>
               </ul>
             </div>
           </div>
-        </div>
-        <div class="col-lg-8">
-          <div class="card">
+
+        
             
