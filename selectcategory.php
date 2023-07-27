@@ -1,6 +1,23 @@
 <?php
 include("attachtop.php");
 include("connection.php");
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  if (isset($_POST['category_name'])) {
+      $category_name = htmlspecialchars(trim($_POST['category_name']));
+
+      $insert_sql = "INSERT INTO categories (name) VALUES (?)";
+      $stmt = $conn->prepare($insert_sql);
+      $stmt->bind_param('s', $category_name);
+      if ($stmt->execute()) {
+    
+          header("Location: forum.php");
+          exit;
+      } else {
+        header("Location: selectcategory.php");
+      }
+  }
+}
 ?>
 
         </div>
@@ -15,12 +32,11 @@ include("connection.php");
   <div class="row">
 
 
-
-
-
   <?php
 $category_sql = "SELECT * FROM categories";
-$category_result = $conn->query($category_sql);
+$stmt = $conn->prepare($category_sql);
+$stmt->execute();
+$category_result = $stmt->get_result();
 ?>
 
 <div class="card mb-4">
@@ -41,7 +57,22 @@ $category_result = $conn->query($category_sql);
 </div>
         
 
-        
+      
+      <div class="card">
+                    <div class="card-header">
+                        <h5>Add a New Category:</h5>
+                    </div>
+                  <div class="card-body">
+                        <form method="post" action="selectcategory.php">
+                            <div class="mb-3">
+                                <label for="category_name" class="form-label">Category Name:</label>
+                                <input type="text" class="form-control" id="category_name" name="category_name" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Add Category</button>
+                        </form>
+                    </div>
+                </div>
+            
 
 
   
