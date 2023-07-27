@@ -42,7 +42,7 @@ include("functions.php");
                 <div class="card mb-3">
                     <div class="card-header">
                         <strong><?php echo $username; ?></strong>
-                        <span class="text-muted"><?php echo $creation_date; ?></span>
+                        <span class="text-muted"><em class="white-text"><?php echo $creation_date; ?></em></span>
                     </div>
                     <div class="card-body">
                         <?php echo $content; ?>
