@@ -51,6 +51,21 @@ function scanPdfFiles($pdf_folder) {
     }
 }
 
+function getCategoryName($conn, $category_id) {
+    $sql = "SELECT name FROM categories WHERE category_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('i', $category_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        return htmlspecialchars($row['name']);
+    } else {
+        return "Unknown Category";
+    }
+}
+
 function getUserGoals($conn, $userId) {
     $query = "SELECT * FROM goals WHERE user_id = ?";
     $stmt = $conn->prepare($query);

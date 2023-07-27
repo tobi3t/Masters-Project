@@ -1,29 +1,30 @@
 <?php
 session_start();
-require_once 'connection.php';
+include("connection.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_SESSION['user_id'])) {
+    if (isset($_SESSION['user_id']) && isset($_POST['content']) && isset($_POST['category_id'])) {
         $user_id = $_SESSION['user_id'];
+        $content = htmlspecialchars(trim($_POST['content']));
+        $category_id = $_POST['category_id']; 
 
-        $content = $_POST['content'];
+        $sql = "INSERT INTO chat_messages (content, user_id, category_id) VALUES (?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('sii', $content, $user_id, $category_id);
 
-        $content = htmlspecialchars(trim($content));
-
-        $sql = "INSERT INTO chat_messages (content, user_id) VALUES ('$content', $user_id)";
-        if ($conn->query($sql) === TRUE) {
+        if ($stmt->execute()) {
             $update_points_sql = "UPDATE user_points SET points = points + 2 WHERE user_id = $user_id";
             if ($conn->query($update_points_sql) === TRUE) {
-                header("Location: forum.php");
+                header("Location: forum.php?category_id=$category_id"); 
                 exit;
             } else {
                 echo "Error updating points: " . $conn->error;
             }
         } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
+            echo "Error: " . $stmt->error;
         }
     } else {
-        header('Location: signin.html');
+        header('Location: ');
         exit;
     }
 }
