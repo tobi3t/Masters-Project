@@ -50,7 +50,7 @@ include("connection.php");
 </div>
 <div class="row justify-content-center">
   <div class="col-md-6">
-    <div class="mb-4 text-center border rounded p-4">
+    <div class="mb-4 text-center border rounded p-4 bg-light">
       <h5 class="card-title">Streak Counter and Setter</h5>
       <p class="card-text">Current streak:</p>
       <h1>
@@ -136,7 +136,7 @@ include("connection.php");
     </div>
   </div>
 </div>
-<div class="border rounded p-4">
+<div class="border rounded p-4 bg-light">
   <div class="row justify-content-center">
     <div class="col-md-4">
       <div class="mb-4 text-center">
