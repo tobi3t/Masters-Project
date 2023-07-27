@@ -35,7 +35,7 @@ $conn->close();
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Personal Profile</title>
+  <title>Admin Profile</title>
   <!--BOOTSTRAP 5 CSS STYLESHEET-->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -75,6 +75,7 @@ $conn->close();
                 <li class="list-group-item"><a href="adminpdfs.php">Manage PDFs</a></li> 
                 <li class="list-group-item"><a href="adminquiz.php">Manage Quiz Questions</a></li>
                 <li class="list-group-item"><a href="pointsmonitor.php">Points Monitor</a></li>
+                <li class="list-group-item"><a href="adminforum.php">Manage Forum Categories</a></li>
                 <li class="list-group-item"><a href="adminfeedback.php">Manage Feedback</a></li>
               </ul>
             </div>
