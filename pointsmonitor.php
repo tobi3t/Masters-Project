@@ -4,7 +4,7 @@ include("connection.php");
 ?>
 
 <div class="card-header">
-  <h4 class="card-title">Leaderboard</h4>
+  <h4 class="card-title">Points Table</h4>
 </div>
 
 <div class="card-body">

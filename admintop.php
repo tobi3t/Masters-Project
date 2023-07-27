@@ -74,7 +74,7 @@ $conn->close();
                 <li class="list-group-item"><a href="adminarticles.php">Manage Articles</a></li>
                 <li class="list-group-item"><a href="adminpdfs.php">Manage PDFs</a></li> 
                 <li class="list-group-item"><a href="adminquiz.php">Manage Quiz Questions</a></li>
-                <li class="list-group-item"><a href="leaderboard.php">Leaderboard</a></li>
+                <li class="list-group-item"><a href="pointsmonitor.php">Points Monitor</a></li>
                 <li class="list-group-item"><a href="adminfeedback.php">Manage Feedback</a></li>
               </ul>
             </div>
