@@ -58,6 +58,9 @@ $conn->close();
               <a class="nav-link" aria-current="page" href="dashboard.php">Dashboard</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="changepassword.php">Change Password</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="logout.php">Logout</a>
             </li>
           </ul>
