@@ -33,10 +33,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['category_name'])) {
 
     <div class="card">
         <div class="card-header">
-            <h4 class="card-title">Select Category</h4>
+            <h4 class="card-title">Manage Category</h4>
         </div>
         <div class="card-body">
             <div class="row">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div>
+                            <h5>Add a New Category:</h5>
+                        </div>
+                        <form method="post" action="adminforum.php">
+                            <div class="mb-3">
+                                <label for="category_name" class="form-label">Category Name:</label>
+                                <input type="text" class="form-control" id="category_name" name="category_name" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Add Category</button>
+                        </form>
+                    </div>
+                </div>
                 <?php
                 $category_sql = "SELECT * FROM categories";
                 $stmt = $conn->prepare($category_sql);
@@ -66,22 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['category_name'])) {
                         </ul>
                     </div>
                 </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        <h5>Add a New Category:</h5>
-                    </div>
-                    <div class="card-body">
-                        <form method="post" action="adminforum.php">
-                            <div class="mb-3">
-                                <label for="category_name" class="form-label">Category Name:</label>
-                                <input type="text" class="form-control" id="category_name" name="category_name" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Add Category</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+             </div>
         </div>
     </div>
 </div>
