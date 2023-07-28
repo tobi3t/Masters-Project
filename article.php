@@ -48,6 +48,10 @@ if ($result->num_rows === 0) {
 $conn->close();
 ?>
 
+</div>
+<div class="col-lg-8">
+<div class="card">
+
 <div class="card-header">
     <h4 class="card-title">Resources</h4>
 </div>
