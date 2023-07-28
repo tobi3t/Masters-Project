@@ -26,7 +26,7 @@ $stmt->close();
 
 $_SESSION['firstname'] = $firstname;
 
-$conn->close();
+// $conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -77,6 +77,7 @@ $conn->close();
                 <li class="list-group-item"><a href="pointsmonitor.php">Points Monitor</a></li>
                 <li class="list-group-item"><a href="adminforum.php">Manage Forum Categories</a></li>
                 <li class="list-group-item"><a href="adminfeedback.php">Manage Feedback</a></li>
+                <li class="list-group-item"><a href="adminvideos.php">Manage Videos</a></li>
               </ul>
             </div>
           </div>

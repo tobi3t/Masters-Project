@@ -4,6 +4,7 @@ include("connection.php");
 include("functions.php");
 
 $articles = getArticles($conn);
+$videos = getVideos($conn);
 $conn->close();
 ?>
 
@@ -38,6 +39,24 @@ $conn->close();
                 ?>
             </ul>
         </div>
+
+
+        <div class="container mt-4">
+    <h4 class="mb-4">Videos</h4>
+    <ul class="list-group">
+        <?php if (!empty($videos)): ?>
+            <?php foreach ($videos as $video): ?>
+                <li class="list-group-item">
+                    <a href="view_video.php?id=<?php echo htmlspecialchars($video['id']); ?>"><?php echo htmlspecialchars($video['video_title']); ?></a>
+                </li>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <li class="list-group-item">No videos found.</li>
+        <?php endif; ?>
+    </ul>
+</div>
+
+
     </div>
 </div>
 

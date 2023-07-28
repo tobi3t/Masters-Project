@@ -51,6 +51,22 @@ function scanPdfFiles($pdf_folder) {
     }
 }
 
+
+function getVideos($conn) {
+    $videos = array();
+    $sql = "SELECT * FROM videos";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $videos[] = $row;
+        }
+    }
+
+    return $videos;
+}
+
+
 function getCategoryName($conn, $category_id) {
     $sql = "SELECT name FROM categories WHERE category_id = ?";
     $stmt = $conn->prepare($sql);
