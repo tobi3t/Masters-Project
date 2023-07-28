@@ -2,6 +2,7 @@
 session_start();
 
 include("connection.php");
+include("functions.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $userId = $_SESSION['user_id'];
@@ -14,6 +15,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $result = $stmt->get_result();
 
   if ($result->num_rows > 0) {
+    $currentStreak = getCurrentStreak($conn, $userId);
+
+    $query = "INSERT INTO streak_history (streak_duration, user_id) VALUES (?, ?)";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param('si', $currentStreak, $userId);
+    $stmt->execute();
+
     $query = "UPDATE streaks SET streak_start_date = ? WHERE user_id = ?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param('si', $startDate, $userId);
