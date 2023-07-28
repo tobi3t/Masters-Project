@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once 'connection.php';
+include("functions.php"); 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_SESSION['user_id'])) {
@@ -12,9 +13,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $category_id = $_POST['category_id'];
 
-        $sql = "INSERT INTO comments (content, user_id, message_id) VALUES (?, ?, ?)";
+        
+        if (isset($_FILES['comment_image']) && $_FILES['comment_image']['error'] === UPLOAD_ERR_OK) {
+            $target_dir = "uploads/";
+            $target_file = $target_dir . basename($_FILES['comment_image']['name']);
+
+           
+            $allowed_types = array('jpg', 'jpeg', 'png', 'gif');
+            $file_extension = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+            if (!in_array($file_extension, $allowed_types)) {
+               
+            }
+
+            
+            if (move_uploaded_file($_FILES['comment_image']['tmp_name'], $target_file)) {
+                $comment_image_path = $target_file;
+            } else {
+               
+                $comment_image_path = null;
+            }
+        } else {
+            $comment_image_path = null;
+        }
+
+        $sql = "INSERT INTO comments (content, user_id, message_id, comment_image) VALUES (?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param('sii', $comment_content, $user_id, $message_id);
+        $stmt->bind_param('siis', $comment_content, $user_id, $message_id, $comment_image_path);
 
         if ($stmt->execute()) {
             $update_points_sql = "UPDATE user_points SET points = points + 3 WHERE user_id = $user_id";
