@@ -7,7 +7,7 @@ include("connection.php");
 <div class="col-lg-8">
     <div class="card h-100">
         <div class="card-header">
-            <h4 class="card-title">Embedded Video</h4>
+            <h4 class="card-title">View Video</h4>
         </div>
         <div class="card-body d-flex flex-column justify-content-center align-items-center">
             <?php
