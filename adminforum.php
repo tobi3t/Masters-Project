@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_category_id'])
     $stmt = $conn->prepare($delete_sql);
     $stmt->bind_param('i', $delete_category_id);
     if ($stmt->execute()) {
-                header("Location: adminforum.php");
+        echo '<div class="h4 alert alert-success" role="alert">Category deleted successfully!</div>';;
         exit;
     } else {
         header("Location: adminforum.php");
