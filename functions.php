@@ -82,6 +82,16 @@ function getCategoryName($conn, $category_id) {
     }
 }
 
+function hasUserViewedVideo($conn, $user_id, $video_id) {
+    $query = "SELECT COUNT(*) AS count FROM video_views WHERE user_id = ? AND video_id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("ii", $user_id, $video_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    return ($row['count'] > 0);
+}
+
 function getUserGoals($conn, $userId) {
     $query = "SELECT * FROM goals WHERE user_id = ?";
     $stmt = $conn->prepare($query);

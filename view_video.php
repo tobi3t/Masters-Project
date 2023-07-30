@@ -1,6 +1,38 @@
 <?php
 include("attachtop.php");
 include("connection.php");
+include("functions.php");
+
+if (!isset($_SESSION['user_id'])) {
+
+    header("Location: index.php");
+    exit();
+}
+
+if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+    $video_id = $_GET['id'];
+
+    $user_id = $_SESSION['user_id'];
+    $has_viewed = hasUserViewedVideo($conn, $user_id, $video_id);
+
+    if (!$has_viewed) {
+        $points_to_award = 10;
+        $query = "UPDATE user_points SET points = points + ? WHERE user_id = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("ii", $points_to_award, $user_id);
+        $stmt->execute();
+
+        $query = "INSERT INTO video_views (user_id, video_id) VALUES (?, ?)";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("ii", $user_id, $video_id);
+        $stmt->execute();
+    }
+
+} else {
+    header("Location: resources.php");
+    exit();
+}
+
 ?>
 
 </div>
