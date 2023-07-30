@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 <div class="card-header">
-  <h4 class="card-title">Select Category</h4>
+  <h4 class="card-title">Select Chat Room</h4>
 </div>
 <div class="card-body">
   <div class="row">
@@ -41,7 +41,7 @@ $category_result = $stmt->get_result();
 
 <div class="card mb-4">
   <div class="card-body">
-    <h5>Select a Category:</h5>
+    <h5>Select a Chat Room:</h5>
     <ul class="list-group">
       <?php
       if ($category_result->num_rows > 0) {
@@ -60,15 +60,15 @@ $category_result = $stmt->get_result();
       
       <div class="card">
                     <div class="card-header">
-                        <h5>Add a New Category:</h5>
+                        <h5>Add a New Chat Room:</h5>
                     </div>
                   <div class="card-body">
                         <form method="post" action="selectcategory.php">
                             <div class="mb-3">
-                                <label for="category_name" class="form-label">Category Name:</label>
+                                <label for="category_name" class="form-label">Room Name:</label>
                                 <input type="text" class="form-control" id="category_name" name="category_name" required>
                             </div>
-                            <button type="submit" class="btn btn-primary">Add Category</button>
+                            <button type="submit" class="btn btn-primary">Add</button>
                         </form>
                     </div>
                 </div>
