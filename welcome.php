@@ -37,6 +37,7 @@ include("attachtop.php");
         <li class="list-group-item">Quiz Participation: <strong>1 to 5 points</strong> added for each attempt (multiple attempts are encouraged)</li>
         <li class="list-group-item">Article Reading: <strong>10 points</strong> (added only once on first open)</li>
         <li class="list-group-item">PDF Downloads: <strong>5 points</strong> for each item downloaded</li>
+        <li class="list-group-item">Viewing Videos: <strong>10 points</strong> (added only once on first open)</li>
       </ul>
     </div>
   </div>
