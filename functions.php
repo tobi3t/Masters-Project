@@ -1,29 +1,29 @@
 <?php
 function getCurrentStreak($conn, $userId) {
-    // SQL query to retrieve the most recent streak start date
+    # retrieving the most recent streak start date
     $query = "SELECT streak_start_date FROM streaks WHERE user_id = ? ORDER BY streak_start_date DESC LIMIT 1";
 
-    // Prepare the SQL query and bind
+    # preparing the SQL query and bind
     $stmt = $conn->prepare($query);
     $stmt->bind_param('i', $userId);
     $stmt->execute();
     $result = $stmt->get_result();
 
-    // Check if there are any rows returned from the query.
+    # checking if there are any rows returned from the query
     if ($result->num_rows > 0) {
-      $row = $result->fetch_assoc(); // Fetch the first row of the result as an associative array.
-      $streakStartDate = $row['streak_start_date']; // Extract the streak start date from the row.
+      $row = $result->fetch_assoc(); 
+      $streakStartDate = $row['streak_start_date']; 
+      # getting the current date in "Y-m-d" format
+      $presentDate = date("Y-m-d"); 
 
-      $presentDate = date("Y-m-d"); // Get the current date in "Y-m-d" format.
-
-      // Calculate the difference between the present date and the streak start date in seconds.
+      # calculating the difference between the present date and the streak start date in seconds
       $dateDiff = abs(strtotime($presentDate) - strtotime($streakStartDate));
-      // Convert the difference from seconds to days and round it down to get the current streak duration.
+      # converting the difference from seconds to days and rounding it down to get the current streak duration
       $currentStreak = floor($dateDiff / (60 * 60 * 24)); 
 
-      return $currentStreak; // Return the current streak duration.
+      return $currentStreak;
     }
-    // If no streaks were found for the user, return 0 indicating no current streak.
+    # if no streaks were found for the user, return 0 indicating no current streak
     return 0;
    }
 
