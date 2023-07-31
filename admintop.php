@@ -26,7 +26,6 @@ $stmt->close();
 
 $_SESSION['firstname'] = $firstname;
 
-// $conn->close();
 ?>
 
 <!DOCTYPE html>
