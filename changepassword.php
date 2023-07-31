@@ -1,5 +1,5 @@
 <?php
-include("attachtop.php"); #  attaching the header or nav bars
+include("attachtop.php"); #  attaching the header and nav bars
 include("connection.php"); # establishing connection to database
 
 if (!isset($_SESSION['user_id'])) {
