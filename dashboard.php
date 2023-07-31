@@ -19,19 +19,20 @@ include("streakhistory.php");
         <h5 class="card-title">Points Earned</h5>
         <p class="display-1 font-weight-bold">
         <?php
-
+        # getting the user_id from the session and storing it in a variable
         $userId = $_SESSION['user_id'];
+        # retrieving the points of the user from the user_points table
         $query = "SELECT points FROM user_points WHERE user_id = ?";
         $stmt = $conn->prepare($query);
         $stmt->bind_param('i', $userId);
         $stmt->execute();
-        $result = $stmt->get_result();
-
+        # checking if there are any rows in the result
         if ($result && $result->num_rows > 0) {
+          # fetching the row of the result as an associative array
           $row = $result->fetch_assoc();
           $points = $row['points'];
 
- 
+          # determining the user's level based on their points
           if ($points <= 300) {
             $level = "Seeker";
           } elseif ($points <= 1000) {
@@ -41,7 +42,7 @@ include("streakhistory.php");
           } else {
             $level = "Conqueror";
           }
-
+          # outputing the points and preventing XSS attacks as well
           echo htmlspecialchars($points);
         } else {
           echo '0';
