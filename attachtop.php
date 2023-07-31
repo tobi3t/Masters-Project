@@ -1,29 +1,30 @@
 <?php
 session_start();
-
+# checking if the user is not authenticated
 if (!isset($_SESSION['email'])) {
   header("Location: signin.html");
   exit();
 }
 
 include("connection.php");
-
+# storing the email in a session variable
 $email = $_SESSION['email'];
-
+# define an array of all the admin email addresses present in the users table
 $adminEmails = array('admin1@measurerecovery.com', 'admin2@measurerecovery.com', 'admin3@measurerecovery.com');
-
+# checking if the user's email is in the array of admin emails
 if (in_array($email, $adminEmails)) {
-  header("Location: adminarticles.php");
+  header("Location: adminarticles.php");  # if the user is an admin, redirect them to admin page
   exit();
 }
-
+# preparing a database query to retrieve the first name of the user using their email
 $stmt = $conn->prepare("SELECT first_name FROM users WHERE email = ?");
+
 $stmt->bind_param("s", $email);
 $stmt->execute();
 $stmt->bind_result($firstname);
 $stmt->fetch();
 $stmt->close();
-
+# storing the user's first name in a session variable
 $_SESSION['firstname'] = $firstname;
 
 $conn->close();
