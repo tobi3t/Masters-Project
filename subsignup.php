@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $conn->prepare('INSERT INTO user_points (user_id, points) VALUES (?, ?)');
         $stmt->bind_param('ii', $user_id, $points);
         $stmt->execute();
-    # redirecting the user to the signin page after successful registration and exiting
+    # redirecting the user to the sign in page after successful registration and exiting
         header('Location: signin.html');
         exit();
     } else {
