@@ -204,7 +204,7 @@ include("streakhistory.php");
             if ($result->num_rows > 0) {
                 $row = $result->fetch_assoc();
                 $targetStreak = (int)$row['target_streak'];
-                $progressPercentage = ($actualStreak / $targetStreak) * 100;
+                $progressPercentage = round((($actualStreak / $targetStreak) * 100),2);
                 $progressPercentage = min($progressPercentage, 100);
 
                 echo '
