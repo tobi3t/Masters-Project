@@ -27,7 +27,7 @@ if (isset($_GET['category_id'])) {
                         <div class="mb-3">
                             <input type="hidden" name="category_id" value="<?php echo $selected_category_id; ?>">
                             <label for="content" class="form-label">Your Message:</label>
-                            <textarea class="form-control" id="content" name="content" rows="3" required></textarea>
+                            <textarea class="form-control" id="content" name="content" rows="1" required></textarea>
                         </div>
 
                         
@@ -115,7 +115,7 @@ if (isset($_GET['category_id'])) {
                                         <input type="hidden" name="message_id" value="<?php echo $message_id; ?>">
                                         <div class="mb-3">
                                             <label for="comment_content" class="form-label">Your Comment:</label>
-                                            <textarea class="form-control" id="comment_content" name="comment_content" rows="2" required></textarea>
+                                            <textarea class="form-control" id="comment_content" name="comment_content" rows="1" required></textarea>
                                         </div>
 
                                         <div class="mb-3">
