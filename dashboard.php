@@ -152,19 +152,22 @@ include("streakhistory.php");
       <div class="mb-4 text-center">
         <h5 class="card-title">Target Streak</h5>
         <?php
+            # getting the user_id from the session
             $userId = $_SESSION['user_id'];
-
+            # preparing database query
             $query = "SELECT target_streak FROM target_streaks WHERE user_id = ?";
             $stmt = $conn->prepare($query);
             $stmt->bind_param('i', $userId);
             $stmt->execute();
             $result = $stmt->get_result();
-            
+            # checking if the query returned any rows
             if ($result->num_rows > 0) {
                 $row = $result->fetch_assoc();
                 $targetStreak = $row['target_streak'];
+                # displaying the target streak value
                 echo "<p class='display-4 font-weight-bold text-success'>$targetStreak days</p>";
             } else {
+                # displays '0 day' if no target streak value is found in the database
                 echo "<p class='display-4 font-weight-bold'>0 day</p>";
             }
             ?>
@@ -179,34 +182,38 @@ include("streakhistory.php");
         <h5 class="card-title">Progress Towards Target Streak</h5>
         <?php
 
-       
+        # getting the user_id
         $userId = $_SESSION['user_id'];
 
-        
+        # preparing a database query to retrieve the user's most recent streak
         $query = "SELECT streak_start_date FROM streaks WHERE user_id = ? ORDER BY streak_start_date DESC LIMIT 1";
         $stmt = $conn->prepare($query);
         $stmt->bind_param('i', $userId);
         $stmt->execute();
         $result = $stmt->get_result();
-
+        # checking if the query returned any rows
         if ($result->num_rows > 0) {
+            # fetching the start date from the query result
             $row = $result->fetch_assoc();
             $streakStartDate = new DateTime($row['streak_start_date']);
             $presentDate = new DateTime();
+            # calculating the acutual streak duration in days using the DateTime objects
             $actualStreak = $presentDate->diff($streakStartDate)->days;
-
+            # preparing query to retrieve user's target streak
             $query = "SELECT target_streak FROM target_streaks WHERE user_id = ?";
             $stmt = $conn->prepare($query);
             $stmt->bind_param('i', $userId);
             $stmt->execute();
             $result = $stmt->get_result();
-
+            # checking if the query returned any rows
             if ($result->num_rows > 0) {
                 $row = $result->fetch_assoc();
                 $targetStreak = (int)$row['target_streak'];
+                # calculating progress percentage towards the target streak and round it to two decimal places
                 $progressPercentage = round((($actualStreak / $targetStreak) * 100),2);
+                # ensureing that the progress percentage does not exceed 100%
                 $progressPercentage = min($progressPercentage, 100);
-
+                # displaying the progress bar with the calculated progress percentage
                 echo '
                 <div class="progress">
                     <div class="progress-bar bg-success" role="progressbar" style="width: '.$progressPercentage.'%;" 
