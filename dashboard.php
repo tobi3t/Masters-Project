@@ -26,6 +26,8 @@ include("streakhistory.php");
         $stmt = $conn->prepare($query);
         $stmt->bind_param('i', $userId);
         $stmt->execute();
+        # retrieving result from the result
+        $result = $stmt->get_result();
         # checking if there are any rows in the result
         if ($result && $result->num_rows > 0) {
           # fetching the row of the result as an associative array
