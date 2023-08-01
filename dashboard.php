@@ -86,7 +86,7 @@ include("streakhistory.php");
         <form action="setstreak.php" method="POST">
           <div class="mb-3">
             <label for="startDateInput" class="form-label">Start Date</label>
-            <input type="date" class="form-control" id="startDateInput" name="startDate" required>
+            <input type="date" class="form-control" id="startDateInput" name="startDate" required max="<?php echo date('Y-m-d');?>">
           </div>
           <button type="submit" class="btn btn-primary">Save</button>
         </form>
