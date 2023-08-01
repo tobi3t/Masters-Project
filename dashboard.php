@@ -102,11 +102,13 @@ include("streakhistory.php");
       <h5 class="card-title">Badges</h5>
       <p class="display-4 font-weight-bold">
         <?php
+        # getting the user ID from the session
         $userId = $_SESSION['user_id'];
+        # getting the current streak duration using function getCurrentStreak()
         $currentStreak = getCurrentStreak($conn, $userId);
 
 
-
+        # checking the value of the current streak to determine the appropriate icon to display (Bootstrap Icons used as Badges)
         if ($currentStreak < 7) {
           echo '<i class="bi bi-exclamation-triangle-fill" style="color: red;"></i>';
         }
