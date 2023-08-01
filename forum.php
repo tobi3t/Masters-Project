@@ -17,7 +17,7 @@ if (isset($_GET['category_id'])) {
     <div class="card">
 
         <div class="card-header">
-            <h4 class="card-title"><?php echo getCategoryName($conn, $selected_category_id); ?> Chat Room</h4>
+            <h4 class="card-title"><?php echo getCategoryName($conn, $selected_category_id); ?></h4>
         </div>
         <div class="card-body">
             <div class="row">
