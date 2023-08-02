@@ -9,7 +9,15 @@ include("attachtop.php");
     <div class="card-header">
       <h4 class="text-center">Welcome!</h4>
 </div>
-<div class="container mt-4">
+<div class="container  bg-info">
+<div class="card mt-4">
+    <div class="card-body">
+      <h4 class="text-center">MeasureRecovery: Your Journey to Personal Growth and Recovery</h4>
+      <p>
+      At MeasureRecovery, we are dedicated to providing you with a comprehensive platform designed to support your personal development and addiction recovery journey. Our unique features are tailored to incentivize your engagement and provide you with the tools you need to track your progress. Whether you're aiming to overcome challenges, set and achieve goals, or simply embark on a journey of self-improvement, MeasureRecovery is here to guide you every step of the way.
+      </p>
+    </div>
+  </div><br>
   <div class="card">
     <div class="card-body">
     <h4 class="text-center">Features</h4>
@@ -64,7 +72,6 @@ include("attachtop.php");
     </div>
   </div>
 </div>
-<br>
 
 <?php
 include("attachbottom.php");
