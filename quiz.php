@@ -12,7 +12,7 @@ include("connection.php");
     <div class="row">
 
     <?php
-
+# retrieving all quiz questions from the database.
 $sql = "SELECT * FROM quiz";
 $result = $conn->query($sql);
 
@@ -23,14 +23,16 @@ if ($result->num_rows > 0) {
     }
 }
 
+# shuffling the array of questions to randomize their order
 shuffle($questions);
 
 # selecting the first 5 questions after shuffling
 $selectedQuestions = array_slice($questions, 0, 5);
 
+# processing the quiz form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $score = 0;
-
+    # iterating through selected questions and calculate the score
     foreach ($selectedQuestions as $question) {
         $question_id = $question['question_id'];
         $correct_option = $question['correct_option'];
@@ -40,14 +42,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $score++;
         }
     }
-
+    # updating user's points and score based on the quiz result
     $user_id = $_SESSION['user_id'];
 
     $stmt = $conn->prepare("SELECT * FROM user_points WHERE user_id = ?");
     $stmt->bind_param('i', $user_id);
     $stmt->execute();
     $result = $stmt->get_result();
-
+    # updating user's points and score in the database.
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
         $points = $row['points'] + $score;
@@ -58,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt = $conn->prepare("INSERT INTO user_points (user_id, points, score) VALUES (?, ?, ?)");
         $stmt->bind_param('iii', $user_id, $score, $score);
     }
-
+    # redirecting to the result page after updating the database
     if ($stmt->execute()) {
         $stmt->close();
 
@@ -90,7 +92,7 @@ $conn->close();
                     $options = array($question['option1'], $question['option2'], $question['option3'], $question['option4']);
                     
                     shuffle($options);
-
+                    # displaying radio options for each question
                     foreach ($options as $option) {
                         echo '<div class="form-check">';
                         echo '<input class="form-check-input" type="radio" name="question' . $question['question_id'] . '" id="q' . $question['question_id'] . '-option' . $option . '" value="' . $option . '">';
