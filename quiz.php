@@ -25,10 +25,13 @@ if ($result->num_rows > 0) {
 
 shuffle($questions);
 
+# selecting the first 5 questions after shuffling
+$selectedQuestions = array_slice($questions, 0, 5);
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $score = 0;
 
-    foreach ($questions as $question) {
+    foreach ($selectedQuestions as $question) {
         $question_id = $question['question_id'];
         $correct_option = $question['correct_option'];
         $selected_option = $_POST['question' . $question_id];
@@ -73,7 +76,7 @@ $conn->close();
         <div class="container">
             <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                 <?php $questionNumber = 1; ?>
-                <?php foreach ($questions as $question) : ?>
+                <?php foreach ($selectedQuestions as $question) : ?>
                 <div class="card mb-4">
                     <div class="card-body">
                         <h5 class="card-title">Question
