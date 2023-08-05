@@ -53,7 +53,7 @@ $conn->close();
 <div class="card">
 
 <div class="card-header">
-    <h4 class="card-title">Resources</h4>
+    <h4 class="card-title">Article</h4>
 </div>
 <div class="card-body">
     <div class="row">
