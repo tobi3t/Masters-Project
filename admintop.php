@@ -74,7 +74,7 @@ $_SESSION['firstname'] = $firstname;
                 <li class="list-group-item"><a href="adminpdfs.php">Manage PDFs</a></li> 
                 <li class="list-group-item"><a href="adminquiz.php">Manage Quiz Questions</a></li>
                 <li class="list-group-item"><a href="pointsmonitor.php">Points Monitor</a></li>
-                <li class="list-group-item"><a href="adminforum.php">Manage Forum Categories</a></li>
+                <li class="list-group-item"><a href="adminforum.php">Manage Chat Rooms</a></li>
                 <li class="list-group-item"><a href="adminfeedback.php">Manage Feedback</a></li>
                 <li class="list-group-item"><a href="adminvideos.php">Manage Videos</a></li>
               </ul>

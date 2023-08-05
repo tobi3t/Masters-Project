@@ -33,21 +33,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['category_name'])) {
 
     <div class="card">
         <div class="card-header">
-            <h4 class="card-title">Manage Category</h4>
+            <h4 class="card-title">Manage Chat Rooms</h4>
         </div>
         <div class="card-body">
             <div class="row">
                 <div class="card mb-4">
                     <div class="card-body">
                         <div>
-                            <h5>Add a New Category:</h5>
+                            <h5>Add a New Chat Rooms:</h5>
                         </div>
                         <form method="post" action="adminforum.php">
                             <div class="mb-3">
-                                <label for="category_name" class="form-label">Category Name:</label>
+                                <label for="category_name" class="form-label">Chat Room Name:</label>
                                 <input type="text" class="form-control" id="category_name" name="category_name" required>
                             </div>
-                            <button type="submit" class="btn btn-primary">Add Category</button>
+                            <button type="submit" class="btn btn-primary">Add Chat Room</button>
                         </form>
                     </div>
                 </div>
@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['category_name'])) {
 
                 <div class="card mb-4">
                     <div class="card-body">
-                        <h5>Delete a Category:</h5>
+                        <h5>Delete a Chat Room:</h5>
                         <ul class="list-group">
                             <?php
                             if ($category_result->num_rows > 0) {
