@@ -11,7 +11,7 @@ $result = getUserGoals($conn, $userId);
 <div class="card">
 
 <div class="card-header">
-  <h4 class="card-title">Manage Goals</h4>
+  <h4 class="card-title">Set Goals</h4>
 </div>
 
 <div class="card-body">
