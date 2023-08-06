@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['category_name'])) {
                                     $category_name = htmlspecialchars($category_row['name']);
                                     $category_id = $category_row['category_id'];
                                     echo '<li class="list-group-item d-flex justify-content-between align-items-center">';
-                                    echo $category_name;
+                                    echo '<a href="adminchatroom.php?category_id=' . $category_row['category_id'] . '">' . $category_name . '</a>';
                                     echo '<form method="post" action="adminforum.php" class="d-inline">';
                                     echo '<input type="hidden" name="delete_category_id" value="' . $category_id . '">';
                                     echo '<button type="submit" class="btn btn-danger btn-sm">Delete</button>';
