@@ -47,15 +47,12 @@ $_SESSION['firstname'] = $firstname;
   <div class="content">
     <nav class="navbar navbar-expand-md navbar-dark py-4 bg-primary">
       <div class="container-fluid">
-        <a class="navbar-brand" href="index.html">MeasureRecovery</a>
+        <a class="navbar-brand" href="adminarticles.php">MeasureRecovery</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menunav">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="menunav">
           <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="adminarticles.php">Manage Articles</a>
-            </li>
             <li class="nav-item">
               <a class="nav-link" href="logout.php">Logout</a>
             </li>
