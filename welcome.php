@@ -38,6 +38,7 @@ include("attachtop.php");
       <h4 class="text-center">How Points are Awarded</h4>
       <ul class="list-group">
         <li class="list-group-item">Registration Bonus: <strong>100 points</strong> (on registration)</li>
+        <li class="list-group-item">Login Bonus: <strong>10 points</strong> everytime you login</li>
         <li class="list-group-item">Chat Posting: <strong>2 points</strong></li>
         <li class="list-group-item">Chat Commenting: <strong>3 points</strong></li>
         <li class="list-group-item">Setting Goals: <strong>2 points</strong></li>
