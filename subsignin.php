@@ -3,7 +3,6 @@ session_start();
 
 include("connection.php");
 
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     $email = $_POST['email'];
@@ -28,15 +27,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $adminEmails = array('admin1@measurerecovery.com', 'admin2@measurerecovery.com', 'admin3@measurerecovery.com');
             if (in_array($email, $adminEmails)) {
                 header('Location: adminarticles.php');
+                exit();
             } else {
+                $userId = $_SESSION['user_id']; 
+                $updateStmt = $conn->prepare('UPDATE user_points SET points = points + 10 WHERE user_id = ?');
+                $updateStmt->bind_param('i', $userId);
+                $updateStmt->execute(); 
                 header('Location: dashboard.php');
+                exit();
             }
-            exit();
         } else {
             header('Location: signin.html');
+            exit();
         }
     } else {
         header('Location: signin.html');
+        exit();
     }
 
     $stmt->close();
