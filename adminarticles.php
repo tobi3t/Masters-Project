@@ -15,27 +15,24 @@ include("admintop.php");
             <?php
 include("connection.php");
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
+# query to select article IDs and titles from the articles table
 $sql = "SELECT id, article_title FROM articles";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
+    # looping through each article and display a list item
     while ($row = $result->fetch_assoc()) {
         $article_id = $row["id"];
         $article_title = $row["article_title"];
 
         echo '<li class="list-group-item d-flex justify-content-between align-items-center">';
         echo $article_title;
-
+        # button to trigger the delete confirmation modal
         echo '<button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal' . $article_id . '">Delete</button>';
 
         echo '</li>';
-
+        
+        # deleting confirmation modal
         echo '<div class="modal fade" id="deleteModal' . $article_id . '" tabindex="-1" aria-labelledby="deleteModalLabel' . $article_id . '" aria-hidden="true">';
         echo '<div class="modal-dialog">';
         echo '<div class="modal-content">';
@@ -70,6 +67,7 @@ $conn->close();
             </ul>
 
             <h2 class="mt-4">Add New Article</h2>
+            <!-- Form for adding a new article -->
             <form action="add_article.php" method="post">
                 <div class="form-group">
                     <label for="title">Title:</label>
