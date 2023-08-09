@@ -12,20 +12,16 @@ include("admintop.php");
         <div id="quiz">
         <?php
         include("connection.php");
-
-        $conn = new mysqli($servername, $username, $password, $dbname);
-
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
-
+        # SQL query to retrieve quiz questions
         $sql = "SELECT * FROM quiz";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
+            # displaying quiz questions in a table
             echo '<table class="table table-bordered">';
             echo '<tr><th>Question Text</th><th>Option 1</th><th>Option 2</th><th>Option 3</th><th>Option 4</th><th>Correct Option</th><th>Action</th></tr>';
             while ($row = $result->fetch_assoc()) {
+                # displaying each question and options
                 echo '<tr>';
                 echo '<td>' . $row["question_text"] . '</td>';
                 echo '<td>' . $row["option1"] . '</td>';
@@ -34,10 +30,12 @@ include("admintop.php");
                 echo '<td>' . $row["option4"] . '</td>';
                 echo '<td>' . $row["correct_option"] . '</td>';
                 echo '<td>';
+                # button to initiate question deletion modal
                 echo '<button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal' . $row["question_id"] . '">Delete</button>';
                 echo '</td>';
                 echo '</tr>';
-
+                
+                # modal for confirming question deletion
                 echo '<div class="modal fade" id="deleteModal' . $row["question_id"] . '" tabindex="-1" aria-labelledby="deleteModalLabel' . $row["question_id"] . '" aria-hidden="true">';
                 echo '<div class="modal-dialog">';
                 echo '<div class="modal-content">';
@@ -50,7 +48,7 @@ include("admintop.php");
                 echo '</div>';
                 echo '<div class="modal-footer">';
                 echo '<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>';
-
+                # form to handle question deletion
                 echo '<form action="deletequiz.php" method="post">';
                 echo '<input type="hidden" name="question_id" value="' . $row["question_id"] . '">';
                 echo '<button type="submit" class="btn btn-danger">Confirm</button>';
@@ -63,6 +61,7 @@ include("admintop.php");
             }
             echo '</table>';
         } else {
+            # display a message if no quiz questions are found
             echo '<div class="alert alert-warning" role="alert">No quiz questions found.</div>';
         }
 
@@ -75,6 +74,7 @@ include("admintop.php");
 
         <h4 class="mt-3">Add New Quiz Question</h4>
         <form action="addquiz.php" method="post">
+            <!-- Form to add a new quiz question -->
             <div class="form-group">
                 <label for="question_text">Question Text:</label>
                 <input type="text" class="form-control" name="question_text" required>
