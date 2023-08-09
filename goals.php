@@ -2,7 +2,9 @@
 include("attachtop.php");
 include("connection.php");
 include("functions.php");
+# retrieving user ID from the session
 $userId = $_SESSION['user_id'];
+# calling the function to get user goals
 $result = getUserGoals($conn, $userId);
 ?>
 
@@ -15,9 +17,11 @@ $result = getUserGoals($conn, $userId);
 </div>
 
 <div class="card-body">
+  <!-- Accordion for displaying goals -->
   <div id="accordion">
 
     <?php
+    # looping through each goal fetched from the database
     while ($row = mysqli_fetch_assoc($result)) {
       $goalId = $row['id'];
       $title = $row['title'];
@@ -26,6 +30,7 @@ $result = getUserGoals($conn, $userId);
 
     <div class="accordion-item">
       <h2 class="accordion-header" id="heading<?php echo $goalId; ?>">
+        <!-- Accordion button that toggles the goal details -->
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
           data-bs-target="#collapse<?php echo $goalId; ?>" aria-expanded="false"
           aria-controls="collapse<?php echo $goalId; ?>">
@@ -35,6 +40,7 @@ $result = getUserGoals($conn, $userId);
       <div id="collapse<?php echo $goalId; ?>" class="accordion-collapse collapse"
         aria-labelledby="heading<?php echo $goalId; ?>" data-bs-parent="#accordion">
         <div class="accordion-body">
+          <!-- Display goal details inside the accordion body -->
           <?php echo $details; ?>
         </div>
       </div>
@@ -53,6 +59,7 @@ $result = getUserGoals($conn, $userId);
             <h4 class="card-title">Add New Goal</h4>
           </div>
           <div class="card-body">
+            <!-- Form to add a new goal -->
             <form action="addgoals.php" method="POST">
               <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
@@ -74,6 +81,7 @@ $result = getUserGoals($conn, $userId);
           <h4 class="card-title">Target Streak Setter</h4>
         </div>
         <div class="card-body">
+          <!-- Form to set target streak for user -->
           <form action="targetstreak.php" method="POST">
             <div class="mb-3">
               <label for="targetStreak" class="form-label">Target Streak (in days)</label>

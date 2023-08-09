@@ -1,9 +1,9 @@
 <?php
-session_start();
+session_start(); # resume the existing session
 
-session_destroy();
+session_destroy(); # destroying the session, effectively logging the user out
 
-header('Location: index.html');
+header('Location: index.html'); # redirecting the user to the "index.html" page
 
-exit;
+exit; # terminating the script
 ?>
