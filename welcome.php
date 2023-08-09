@@ -10,6 +10,7 @@ include("attachtop.php");
       <h4 class="text-center">Welcome!</h4>
 </div>
 <div class="container  bg-info">
+  <!-- Introduction to MeasureRecovery -->
 <div class="card mt-4">
     <div class="card-body">
       <h4 class="text-center">MeasureRecovery: Your Journey to Personal Growth and Recovery</h4>
@@ -17,10 +18,13 @@ include("attachtop.php");
       At MeasureRecovery, we are dedicated to providing you with a comprehensive platform designed to support your personal development and addiction recovery journey. Our unique features are tailored to incentivize your engagement and provide you with the tools you need to track your progress. Whether you're aiming to overcome challenges, set and achieve goals, or simply embark on a journey of self-improvement, MeasureRecovery is here to guide you every step of the way.
       </p>
     </div>
-  </div><br>
+  </div>
+  <br>
+  <!-- Features of the platform -->
   <div class="card">
     <div class="card-body">
     <h4 class="text-center">Features</h4>
+    <!-- List of features with descriptions -->
       <ul class="list-group">
         <li class="list-group-item"><strong>Earn Points</strong> for frequent engagement</li>
         <li class="list-group-item"><strong>Levels</strong> based on points earned</li>
@@ -50,7 +54,7 @@ include("attachtop.php");
       </ul>
     </div>
   </div>
-
+  <!-- Medical disclaimer -->
   <div class="card mt-4">
     <div class="card-body">
       <h4 class="text-center">Medical Disclaimer</h4>
@@ -59,7 +63,7 @@ include("attachtop.php");
       </p>
     </div>
   </div>
-
+  <!-- User discretion and encouragement -->
   <div class="card mt-4">
     <div class="card-body">
       <h4 class="text-center">User Discretion</h4>

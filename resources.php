@@ -3,6 +3,7 @@ include("attachtop.php");
 include("connection.php");
 include("functions.php");
 
+# getting articles and videos from the database
 $articles = getArticles($conn);
 $videos = getVideos($conn);
 $conn->close();
@@ -23,6 +24,7 @@ $conn->close();
                 <?php if (!empty($articles)): ?>
                     <?php foreach ($articles as $article): ?>
                         <li class="list-group-item">
+                            <!-- displaying article title with a link to the article page -->
                             <a href="article.php?id=<?php echo htmlspecialchars($article['id']); ?>&user_id=<?php echo htmlspecialchars($_SESSION['user_id']); ?>"><?php echo htmlspecialchars($article['article_title']); ?></a>
                         </li>
                     <?php endforeach; ?>
@@ -35,6 +37,7 @@ $conn->close();
             <h4 class="mb-4">PDFs</h4>
             <ul class="list-group">
                 <?php
+                # scanning and displaying PDF files from the 'pdfs/' directory
                 scanPdfFiles('pdfs/');
                 ?>
             </ul>
@@ -47,6 +50,7 @@ $conn->close();
         <?php if (!empty($videos)): ?>
             <?php foreach ($videos as $video): ?>
                 <li class="list-group-item">
+                    <!-- displaying video title with a link to the video page -->
                     <a href="view_video.php?id=<?php echo htmlspecialchars($video['id']); ?>"><?php echo htmlspecialchars($video['video_title']); ?></a>
                 </li>
             <?php endforeach; ?>
