@@ -10,6 +10,7 @@ include("managevideos.php");
     <div class="row">
 
         <div class="container">
+            <!-- Add Video Form -->
             <h2>Add Video</h2>
             <?php if (isset($errorMessage)): ?>
                 <div class="alert alert-danger" role="alert">
@@ -30,6 +31,7 @@ include("managevideos.php");
         </div>
 
         <div class="container mt-5">
+            <!-- Video List Table -->
             <h2>Video List</h2>
             <table class="table">
                 <thead>
@@ -41,7 +43,7 @@ include("managevideos.php");
                 </thead>
                 <tbody>
                     <?php
-                    
+                    # Looping through each video result and display it
                     while ($row = $result->fetch_assoc()) {
                         $videoId = $row['id'];
                         $videoTitle = sanitize($row['video_title']);
@@ -51,13 +53,13 @@ include("managevideos.php");
                             <td><?php echo $videoTitle; ?></td>
                             <td><?php echo $videoEmbedCode; ?></td>
                             <td>
-                                
+                                <!-- Delete Video Button and Modal -->
                                 <form method="post" action="adminvideos.php">
                                     <input type="hidden" name="video_id" value="<?php echo $videoId; ?>">
                                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal<?php echo $videoId; ?>">
                                         Delete
                                     </button>
-
+                                    <!-- Delete Video Modal -->
                                     <div class="modal fade" id="deleteModal<?php echo $videoId; ?>" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">

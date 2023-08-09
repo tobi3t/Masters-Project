@@ -37,16 +37,18 @@ $conn->close();
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MeasureRecovery - Personal Profile</title>
-  <!--BOOTSTRAP 5 CSS STYLESHEET-->
+  <!--BOOTSTRAP 5 CSS STYLESHEET => https://getbootstrap.com/docs/5.0/getting-started/introduction/ -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <!--BOOTSTRAP 5 Icons STYLESHEET => https://blog.getbootstrap.com/2021/01/07/bootstrap-icons-1-3-0/ -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+  <!-- Custom CSS Stylesheet -->
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
   <div class="content">
+    <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-md navbar-dark py-4 bg-primary">
       <div class="container-fluid">
         <a class="navbar-brand" href="dashboard.php">MeasureRecovery</a>
@@ -67,10 +69,12 @@ $conn->close();
     </nav>
     <div class="container mt-4">
       <div class="row">
+        <!-- User's Side Panel -->
         <div class="col-lg-4">
           <div class="card mb-4">
             <div class="card-header">Welcome, <?php echo $firstname; ?></div>
             <div class="card-body">
+              <!-- List of User's Pages -->
               <ul class="list-group">
                 <li class="list-group-item"><a href="welcome.php">Welcome</a></li>
                 <li class="list-group-item"><a href="dashboard.php">Dashboard</a></li>
