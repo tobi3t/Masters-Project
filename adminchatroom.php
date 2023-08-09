@@ -82,7 +82,7 @@ if (isset($_GET['category_id'])) {
                                                 <p><?php echo $comment_content; ?></p>
 
                                                 <?php
-                                               
+                                               # displaying image if found
                                                 if (!empty($comment_image)) {
                                                     echo '<img src="' . $comment_image . '" alt="Comment Image" class="img-fluid" style="max-width: 300px; max-height: 300px;">';
                                                 }
