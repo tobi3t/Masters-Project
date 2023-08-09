@@ -13,6 +13,8 @@ include("streakhistory.php");
   <h4 class="card-title">Dashboard</h4>
 </div>
 <div class="card-body">
+
+  <!-- Point Section -->
   <div class="row justify-content-center">
     <div class="col-md-4">
       <div class="mb-4 text-center">
@@ -56,17 +58,22 @@ include("streakhistory.php");
     </div>
   </div>
 </div>
+
+<!-- Streak Counter and Setter Section -->
 <div class="row justify-content-center">
   <div class="col-md-6">
     <div class="mb-4 text-center border rounded p-4 bg-light">
       <h5 class="card-title">Streak Counter and Setter</h5>
       <p class="card-text">Current streak:</p>
+      <!-- Display Current Streak Duration -->
       <h1>
         <span id="currentStreak">
           <?php echo getCurrentStreak($conn, $_SESSION['user_id']); ?>
         </span> days
       </h1>
+      <!-- Button to Open Streak Setting Modal -->
       <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#streakModal">Pick a Date</button>
+      <!-- Form to Reset Streak -->
       <form action="resetstreak.php" method="POST" class="d-inline">
         <button type="submit" class="btn btn-danger">Reset to Today</button>
       </form>
@@ -74,7 +81,7 @@ include("streakhistory.php");
   </div>
 </div>
 
-
+<!-- Streak Setting Modal -->
 <div class="modal fade" id="streakModal" tabindex="-1" aria-labelledby="streakModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -83,11 +90,14 @@ include("streakhistory.php");
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
+        <!-- Form to Set Streak Start Date -->
         <form action="setstreak.php" method="POST">
           <div class="mb-3">
             <label for="startDateInput" class="form-label">Start Date</label>
+            <!-- Input Field to Choose Date, with Maximum Date Today -->
             <input type="date" class="form-control" id="startDateInput" name="startDate" required max="<?php echo date('Y-m-d');?>">
           </div>
+          <!-- Save Button to Submit Form -->
           <button type="submit" class="btn btn-primary">Save</button>
         </form>
       </div>
@@ -95,7 +105,7 @@ include("streakhistory.php");
   </div>
 </div>
 
-
+<!-- Badges Section -->
 <div class="row justify-content-center">
   <div class="col-md-4">
     <div class="mb-4 text-center">
@@ -146,6 +156,8 @@ include("streakhistory.php");
     </div>
   </div>
 </div>
+
+<!-- Target Streak Section -->
 <div class="border rounded p-4 bg-light">
   <div class="row justify-content-center">
     <div class="col-md-4">
@@ -175,6 +187,7 @@ include("streakhistory.php");
     </div>
   </div>
 
+  <!-- Progress Bar Section -->
   <div class="row justify-content-center">
 
     <div class="col-md-6">
@@ -231,6 +244,7 @@ include("streakhistory.php");
 
   </div>
 </div>
+<!-- Goals Section -->
 <div class="mt-5">
     <div class="row">
         <div class="col-md-12">
@@ -238,30 +252,39 @@ include("streakhistory.php");
                 <h2 class="card-title text-center">Goals</h2>
                 <ul class="list-group">
                     <?php
+                    # getting the user ID from the session
                     $userId = $_SESSION['user_id'];
+                    # preparing and execute query to retrieve user's goals
                     $query = "SELECT * FROM goals WHERE user_id = ?";
                     $stmt = $conn->prepare($query);
                     $stmt->bind_param('i', $userId);
                     $stmt->execute();
                     $result = $stmt->get_result();
 
+                     # checking if goals are found
                     if ($result->num_rows > 0) {
+                        # looping through each goal
                         while ($row = $result->fetch_assoc()) {
+                            # getting goal information
                             $goalId = htmlspecialchars($row['id']);
                             $title = htmlspecialchars($row['title']);
                             ?>
+                            <!-- Displaying each goal as a list item -->
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <div>
                                     <?php echo $title; ?>
                                 </div>
                                 <div>
+                                    <!-- Button to open delete confirmation modal -->
                                     <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
                                         data-bs-target="#deleteModal<?php echo $goalId; ?>">Delete</button>
+                                    <!-- Button to open completion confirmation modal -->
                                     <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal"
                                         data-bs-target="#completedModal<?php echo $goalId; ?>">Completed</button>
                                 </div>
                             </li>
 
+                             <!-- Delete Confirmation Modal for each goal -->
                             <div class="modal fade" id="deleteModal<?php echo $goalId; ?>" tabindex="-1"
                                 aria-labelledby="deleteModalLabel<?php echo $goalId; ?>" aria-hidden="true">
                                 <div class="modal-dialog">
@@ -278,6 +301,7 @@ include("streakhistory.php");
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Cancel</button>
+                                            <!-- Form to delete the goal -->
                                             <form action="deletegoal.php" method="POST" class="d-inline">
                                                 <input type="hidden" name="goal_id" value="<?php echo $goalId; ?>">
                                                 <button type="submit" class="btn btn-danger">Confirm</button>
@@ -287,6 +311,7 @@ include("streakhistory.php");
                                 </div>
                             </div>
 
+                            <!-- Completion Confirmation Modal for each goal -->
                             <div class="modal fade" id="completedModal<?php echo $goalId; ?>" tabindex="-1"
                                 aria-labelledby="completedModalLabel<?php echo $goalId; ?>" aria-hidden="true">
                                 <div class="modal-dialog">

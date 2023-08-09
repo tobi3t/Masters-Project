@@ -51,6 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <div class="container mt-4">
         <h2>Change Password</h2>
+        <!-- New password form -->
         <form method="post" action="changepassword.php">
             <div class="mb-3">
                 <label for="new_password" class="form-label">New Password:</label>
