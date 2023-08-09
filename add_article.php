@@ -1,14 +1,6 @@
 <?php
 include("connection.php");
 
-# creating a new MySQLi instance to establish a database connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-# checking if the connection was successful
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
 # getting data from the form using POST method
 $title = $_POST["title"];
 $body = $_POST["body"];
@@ -26,7 +18,8 @@ if ($stmt->execute()) {
     # If there's an error, display an error message
     echo '<div class="alert alert-danger" role="alert">Error adding the article: ' . $stmt->error . '</div>';
 }
-
+# closing the prepared statement
 $stmt->close();
+# closing the database connection
 $conn->close();
 ?>
