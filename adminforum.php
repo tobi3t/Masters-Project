@@ -2,9 +2,11 @@
 include("admintop.php");
 include("connection.php");
 
+# checking if the delete request for a category is received
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_category_id'])) {
     $delete_category_id = $_POST['delete_category_id'];
 
+     # prepare and execute DELETE query for the selected category
      $delete_sql = "DELETE FROM categories WHERE category_id = ?";
     $stmt = $conn->prepare($delete_sql);
     $stmt->bind_param('i', $delete_category_id);
@@ -16,9 +18,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_category_id'])
     }
 }
 
+# checking if a new category is being added
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['category_name'])) {
     $category_name = htmlspecialchars(trim($_POST['category_name']));
-
+    # preparing and execute INSERT query to add a new category
     $insert_sql = "INSERT INTO categories (name) VALUES (?)";
     $stmt = $conn->prepare($insert_sql);
     $stmt->bind_param('s', $category_name);
@@ -42,6 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['category_name'])) {
                         <div>
                             <h5>Add a New Chat Rooms:</h5>
                         </div>
+                        <!-- Form to add a new chat room -->
                         <form method="post" action="adminforum.php">
                             <div class="mb-3">
                                 <label for="category_name" class="form-label">Chat Room Name:</label>
@@ -52,6 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['category_name'])) {
                     </div>
                 </div>
                 <?php
+                # fetching and display existing chat rooms for deletion
                 $category_sql = "SELECT * FROM categories";
                 $stmt = $conn->prepare($category_sql);
                 $stmt->execute();
@@ -65,6 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['category_name'])) {
                             <?php
                             if ($category_result->num_rows > 0) {
                                 while ($category_row = $category_result->fetch_assoc()) {
+                                    # displaying each category for deletion with a delete button
                                     $category_name = htmlspecialchars($category_row['name']);
                                     $category_id = $category_row['category_id'];
                                     echo '<li class="list-group-item d-flex justify-content-between align-items-center">';
