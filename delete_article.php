@@ -11,10 +11,10 @@ $stmt->bind_param("i", $article_id);
 
 # executing the DELETE query and check if it was successful
 if ($stmt->execute()) {
-    // if successful, redirect to the admin articles page
+    # if successful, redirect to the admin articles page
     header('Location: adminarticles.php');
 } else {
-    // if there was an error, display an error message
+    # if there was an error, display an error message
     echo '<div class="alert alert-danger" role="alert">Error deleting the article: ' . $stmt->error . '</div>';
 }
 
