@@ -211,7 +211,7 @@ include("streakhistory.php");
                 $targetStreak = (int)$row['target_streak'];
                 # calculating progress percentage towards the target streak and round it to two decimal places
                 $progressPercentage = round((($actualStreak / $targetStreak) * 100),2);
-                # ensureing that the progress percentage does not exceed 100%
+                # ensuring that the progress percentage does not exceed 100%
                 $progressPercentage = min($progressPercentage, 100);
                 # displaying the progress bar with the calculated progress percentage
                 echo '
