@@ -23,6 +23,7 @@ if (isset($_GET['category_id'])) {
         <div class="card-body">
             <div class="row">
                 <div>
+                    <!-- Form to post a Chat -->
                     <form method="post" action="post_chat.php" enctype="multipart/form-data">
 
                         <div class="mb-3">
@@ -113,7 +114,7 @@ if (isset($_GET['category_id'])) {
                                         echo "<p>No comments yet.</p>";
                                     }
                                     ?>
-                                    <!-- form to post a comment for the current chat message -->
+                                    <!-- Form to post a comment for the current chat message -->
                                     <form method="post" action="post_comment.php" enctype="multipart/form-data">
                                         <input type="hidden" name="category_id" value="<?php echo $selected_category_id; ?>">
                                         <input type="hidden" name="message_id" value="<?php echo $message_id; ?>">
