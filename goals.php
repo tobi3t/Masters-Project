@@ -4,7 +4,7 @@ include("connection.php");
 include("functions.php");
 # retrieving user ID from the session
 $userId = $_SESSION['user_id'];
-# calling the function to get user goals
+# calling the function to get user goals and store output in a session variable
 $result = getUserGoals($conn, $userId);
 ?>
 
