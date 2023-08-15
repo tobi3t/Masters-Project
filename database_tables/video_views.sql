@@ -3,5 +3,5 @@ CREATE TABLE video_views (
     user_id INT,
     video_id INT,
     FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY (video_id) REFERENCES videos(id)
+    FOREIGN KEY (video_id) REFERENCES videos(id) ON DELETE CASCADE
 );
