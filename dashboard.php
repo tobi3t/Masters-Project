@@ -198,20 +198,10 @@ include("streakhistory.php");
         # getting the user_id
         $userId = $_SESSION['user_id'];
 
-        # preparing a database query to retrieve the user's most recent streak
-        $query = "SELECT streak_start_date FROM streaks WHERE user_id = ? ORDER BY streak_start_date DESC LIMIT 1";
-        $stmt = $conn->prepare($query);
-        $stmt->bind_param('i', $userId);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        # checking if the query returned any rows
-        if ($result->num_rows > 0) {
-            # fetching the start date from the query result
-            $row = $result->fetch_assoc();
-            $streakStartDate = new DateTime($row['streak_start_date']);
-            $presentDate = new DateTime();
-            # calculating the acutual streak duration in days using the DateTime objects
-            $actualStreak = $presentDate->diff($streakStartDate)->days;
+        # calling getCurrentStreak function to get the current streak
+        $currentStreak = getCurrentStreak($conn, $userId);
+
+        if ($currentStreak > 0) {
             # preparing query to retrieve user's target streak
             $query = "SELECT target_streak FROM target_streaks WHERE user_id = ?";
             $stmt = $conn->prepare($query);
@@ -223,7 +213,7 @@ include("streakhistory.php");
                 $row = $result->fetch_assoc();
                 $targetStreak = (int)$row['target_streak'];
                 # calculating progress percentage towards the target streak and round it to two decimal places
-                $progressPercentage = round((($actualStreak / $targetStreak) * 100),2);
+                $progressPercentage = round((($currentStreak / $targetStreak) * 100), 2);
                 # ensuring that the progress percentage does not exceed 100%
                 $progressPercentage = min($progressPercentage, 100);
                 # displaying the progress bar with the calculated progress percentage
@@ -238,7 +228,7 @@ include("streakhistory.php");
         } else {
             echo "<p>No streak recorded</p>";
         }
-        ?>
+    ?>
       </div>
     </div>
 
