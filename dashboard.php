@@ -223,9 +223,11 @@ include("streakhistory.php");
                     aria-valuenow="'.$progressPercentage.'" aria-valuemin="0" aria-valuemax="100">'.$progressPercentage.'%</div>
                 </div>';
             } else {
+                # if no target streak set
                 echo "<p>No target streak set</p>";
             }
         } else {
+            # if no streak recorded
             echo "<p>No streak recorded</p>";
         }
     ?>
